@@ -1,0 +1,6 @@
+baseURL = 'https://chaitalks.tech/'
+languageCode = 'en-us'
+title = 'ChaiTalks.Tech'
+theme = 'PaperMod'
+[params]
+author='Chai'
