@@ -18,108 +18,56 @@ tags:
   - "writing-with-ai"
 ---
 
-Blogging isn't dying — it's transforming.
+Blogging isn't dying, it's just getting weird.
 
-As artificial intelligence continues reshaping the content landscape, the question isn't whether blogging will survive, but **how it will evolve**. Whether you’re a hobbyist writer, content marketer, or thought leader, understanding what’s changing can help you stay ahead of the curve.
+AI can now write a 1,500-word post on almost any topic in under a minute. Polished, structured, SEO-tagged. And honestly? A lot of it reads fine. So the obvious question is: what's the point of a human doing it?
 
-Let’s explore what blogging looks like in the age of AI — and what that means for you.
-
-* * *
-
-### **1\. AI Is Changing How Content Gets Created**
-
-AI tools can now write blog posts, summarize articles, rewrite headlines, and even suggest trending topics. In minutes, you can generate polished, SEO-ready posts on almost any subject.
-
-But there’s a catch.
-
-Much of this content is generic. It lacks originality, depth, and personality. As AI-generated posts flood the web, **readers will crave real voices, real stories, and real insight.**
-
-> The takeaway? Use AI to **enhance** your writing, not replace it. Let it handle the busywork — but make sure your voice stays front and center.
+I think about this a lot, partly because I run a blog, and partly because I find the question genuinely interesting.
 
 * * *
 
-### **2\. Human-Centered Writing Will Become More Valuable**
+### The flood of generic content
 
-In a sea of sameness, authenticity will stand out. Personal essays, firsthand experiences, strong opinions, and emotionally resonant storytelling are the kinds of content AI still struggles to replicate.
+The most immediate effect of AI on blogging is volume. There's now an enormous amount of content being produced that is technically correct but completely interchangeable. You've probably landed on some of it, a post that answers your question but somehow leaves you feeling nothing. No voice, no personality, no sense that a real person actually cared about the topic.
 
-This means the best blogs will lean into **what makes us human**:
+That kind of writing was always around, but AI has turned it into a flood. And perversely, I think that's actually good news for anyone willing to write like a human.
 
-- Vulnerability
-
-- Unique perspectives
-
-- Deep expertise
-
-- Humor and quirkiness
-
-In other words, the more “you” your blog is, the more future-proof it becomes.
+When everything sounds the same, the stuff that doesn't stands out. Personal takes, hard-won opinions, stories that only you could tell, that's what becomes valuable. Not because AI can't produce something that looks like it, but because readers can tell the difference when someone actually means what they're saying.
 
 * * *
 
-### **3\. Blogging Will Become More Than Just Text**
+### What actually survives
 
-AI is making it easier to produce multimedia content. Tools like image generators, video summarizers, and voice synthesis will turn traditional blogs into richer, more interactive experiences.
+The blogs that will do well aren't the ones trying to beat AI at its own game, they're the ones doing something AI can't replicate: being genuinely specific. Not "here's a guide to Python packaging" but "here's what broke in my project and what I did about it." Not "vibe coding is changing software development" but "I tried vibe coding for a week and here's what I noticed."
 
-Expect to see:
+First-person specificity is hard to fake. And it tends to be exactly what people are looking for when they're trying to figure something out or decide whether to trust a source.
 
-- Posts with AI-generated illustrations or diagrams
-
-- Embedded video/audio summaries
-
-- Personalized content experiences based on user behavior
-
-> Think of the future blog as a **mini-media outlet**, not just a digital diary.
+The other thing that survives is niche. If you write for everyone, AI already does that better and faster. But if you write for a specific kind of person about a specific set of things, there's an audience for that, and they'll come back.
 
 * * *
 
-### **4\. SEO Is Changing — Fast**
+### SEO is shifting
 
-Search engines are getting smarter about AI content. And as platforms like Google begin showing AI-generated summaries right on results pages, traditional blog traffic may drop.
+Search is changing too. Google is starting to surface AI-generated summaries at the top of results, which means a certain kind of traffic, people who just want a quick answer, may never reach your blog at all. That's a real loss for sites that built their whole strategy around ranking for informational queries.
 
-To stay visible, bloggers will need to:
+But it also means the traffic that does come through is more intentional. People who click past the AI summary are looking for something more: depth, a specific voice, a community. That's worth building for.
 
-- Focus on **original content** that adds real value
-
-- Build **email lists, communities, and direct audiences**
-
-- Become known for **authority and trust**, not just keywords
-
-In short: SEO isn’t dead, but it’s evolving — fast.
+Building an email list matters more now than it did two years ago. Same with building a presence on platforms where your audience already hangs out. Relying entirely on search as a distribution channel is riskier than it used to be.
 
 * * *
 
-### **5\. The Rise of Niche Communities and Personal Brands**
+### AI as a tool, not a ghostwriter
 
-Mass appeal is losing its charm. The future of blogging lies in **micro-communities** and **tight-knit audiences**. Whether it’s a newsletter about obscure philosophy or a blog about sustainable woodworking, focused content wins.
+I don't think the answer is to avoid AI entirely. I use it regularly when I'm writing, mostly for getting unstuck, checking my reasoning, or quickly pulling in a fact I only half-remembered. It's genuinely useful for that.
 
-Platforms like Substack, Ghost, and Patreon are enabling writers to monetize directly from loyal readers — no ads or algorithms required.
+The mistake is outsourcing the thinking to it. The thinking is the whole point. If I let AI figure out what I actually believe about a topic and how to say it, I've skipped the part that makes the writing worth reading.
 
-> Build a niche. Own your audience. Write what matters.
-
-* * *
-
-### **6\. AI Is a Tool — Not a Threat**
-
-The most successful bloggers won’t fear AI. They’ll **collaborate** with it.
-
-Use it to:
-
-- Research faster
-
-- Get unstuck while outlining
-
-- Edit more efficiently
-
-- Generate alternate drafts or titles
-
-AI is like a creative partner — one that works fast, doesn’t sleep, and won’t complain. But the **vision, originality, and final polish** still need to come from you.
+Use it to work faster. Don't use it to work less.
 
 * * *
 
-### **The Bottom Line**
+### The short version
 
-Blogging in the age of AI is less about competing with machines and more about **doubling down on being human**.
+Write like a person. Be specific. Have a take. Build a direct relationship with your readers so you're not entirely dependent on algorithms to find them.
 
-Yes, the landscape is shifting. But if you stay creative, authentic, and adaptable, there’s never been a better time to build something meaningful online.
-
-So write boldly. Share generously. And let AI help you become a sharper, faster, more focused version of yourself — not a copy.
+The blogs that make it through this period won't be the ones that optimized hardest for reach. They'll be the ones that were actually worth reading.

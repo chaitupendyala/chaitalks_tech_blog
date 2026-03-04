@@ -5,12 +5,12 @@ date: 2025-04-07
 
 Hey everyone!
 
-I'm excited to announce something new I'm embarking on: starting today, I'll be posting a **tech article every week** right here on this blog.
+Starting today, I'll be posting a **tech article every week** right here on this blog.
 
-This idea has been brewing for a while, and it finally solidified on my recent birthday. I've been incredibly **inspired** by creators like **Tom Scott**, whose consistent weekly video uploads for nearly a decade have been a testament to dedication and a fantastic source of learning. I've always admired his ability to break down complex topics in an engaging and accessible way.
+This idea has been brewing for a while, and it finally clicked on my recent birthday. I've been a big fan of **Tom Scott** for years — the guy uploaded videos consistently every week for nearly a decade, and every single one was worth watching. He has this rare ability to take something that sounds dry on paper and make you genuinely care about it. That's the kind of thing I want to do here.
 
-I'm not aiming for a decade just yet (though who knows!), but I am committed to sharing something interesting I've learned about the world of technology each week. Whether it's a deep dive into a new programming concept, an exploration of the latest gadgets, a look at the impact of tech on our lives, or just a fascinating tidbit I stumbled upon, I'm eager to share my learning journey with you.
+I'm not committing to a decade just yet (though hey, who knows), but I am committing to showing up every week with something interesting from the world of tech. Could be a deep dive into a programming concept I've been nerding out on, something I'm currently building, or just a fascinating thing I stumbled across and couldn't stop thinking about.
 
-Consider this the official kickoff! Expect the first proper tech article next week. I'm looking forward to exploring and sharing the ever-evolving landscape of technology with you all.
+So this is the official kickoff. First proper article drops next week. Really looking forward to this.
 
 Stay tuned!

@@ -33,9 +33,9 @@ tags:
 coverImage: "image.png"
 ---
 
-Welcome to the first post in my three-part series exploring one of the most fascinating topics in all of mathematics and computer science: the **Busy Beaver Problem**.
+Welcome to the first post in my three-part series on one of the most fascinating problems in all of mathematics and computer science: the **Busy Beaver Problem**.
 
-Before diving into the chaos and wonder of Busy Beavers, I want to start with the surprisingly simple idea that makes it all possible: the **Turing Machine**.
+Before getting into Busy Beavers though, I want to start with the surprisingly simple idea that makes it all possible: the **Turing Machine**. Trust me, you need this foundation — it makes the weirdness that follows much more satisfying.
 
 * * *
 
@@ -43,61 +43,47 @@ Before diving into the chaos and wonder of Busy Beavers, I want to start with th
 
 Picture a tiny robot crawling along an endless strip of paper.
 
-This little machine can:
+This little machine can do exactly four things:
 
-- Look at the square it's standing on.
-
+- Look at the square it's currently sitting on.
 - Write a mark (`0` or `1`) on that square.
-
 - Move one step left or right.
+- Change its internal "mood," or **state**.
 
-- Change its internal "mood" or **state**.
+No memory beyond where it's standing. No cleverness. Just a strict set of rules, followed one step at a time.
 
-No memory. No cleverness. Just following a strict set of instructions.
-
-That’s the heart of a **Turing Machine**, invented by [Alan Turing](https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf) back in 1936.
-
-_(Believe it or not, every laptop, phone, and server today is just an extremely complicated Turing Machine!)_
+That's a **Turing Machine**, invented by [Alan Turing](https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf) in 1936. And here's the wild part: every laptop, phone, and server running today is just an extremely complicated version of this.
 
 * * *
 
 ## What Actually Makes a Turing Machine?
 
-A Turing Machine is built from just a few simple parts:
+A Turing Machine has a few simple parts:
 
-- **A tape**: An infinite row of squares, each holding a symbol (`0` or `1`).
+- **A tape**: An infinite row of squares, each holding a `0` or `1`.
+- **A head**: The thing that reads and writes symbols on the tape.
+- **A finite set of states**: Think of them like the machine's moods.
+- **Transition rules**: Instructions like "if you're in state A and you see a `0`, write a `1`, move right, and switch to state B."
 
-- **A head**: A device that reads and writes symbols on the tape.
+At each step, it reads the symbol underneath it, writes a new symbol, moves left or right, and either switches to a new state or halts.
 
-- **A finite set of states**: Think of them like the robot's moods.
-
-- **Transition rules**: Instructions like: "If you're in state A and you see a `0`, write a `1`, move right, and switch to state B."
-
-At each step, the machine:
-
-1. Reads the symbol underneath it.
-
-3. Writes a new symbol (or overwrites the current one).
-
-5. Moves left or right by one square.
-
-7. Switches to a new state — or halts.
+Simple to describe. Surprisingly hard to reason about, as we'll see.
 
 * * *
 
-## When Does a Turing Machine Halt?
+## When Does It Halt?
 
-Sometimes, a Turing Machine gets to a point where no instructions tell it what to do next.  
-When that happens, it **halts** — the machine freezes, stops writing, and stops moving.
+Sometimes a Turing Machine reaches a point where its rules don't tell it what to do next. When that happens, it **halts** — stops writing, stops moving, done.
 
-Halting matters because it marks the end of a computation.  
-In fact, Alan Turing proved in his famous [Halting Problem](https://en.wikipedia.org/wiki/Halting_problem) that **there’s no universal way to tell whether a machine will halt or run forever**.
+Halting matters because it marks the end of a computation. And Alan Turing proved something uncomfortable in his famous [Halting Problem](https://en.wikipedia.org/wiki/Halting_problem): **there's no universal way to tell whether a machine will halt or run forever**. You just have to watch and find out. You can't reason your way to an answer in general.
+
+That result is going to matter a lot in Part 2.
 
 * * *
 
-## A Tiny Turing Machine in Action (With Two States)
+## A Tiny Turing Machine in Action
 
-Let me show you a slightly more interesting Turing Machine:
+Let me show you a two-state machine so you can see how this actually works:
 
 <figure>
 
@@ -116,95 +102,58 @@ Two State Turing Machine
 
 ![](images/Turing_machine.drawio.png)
 
-Here's how it plays out:
+Here's what happens step by step:
 
-1. The machine starts in **state A**, sitting over a blank cell (`0`).
+1. Machine starts in **state A**, sitting over a blank cell (`0`).
+2. It writes a `1`, moves right, switches to **state B**.
+3. In **state B**, it finds another blank (`0`).
+4. It writes a `1`, moves right.
+5. No rules apply anymore, so it **halts**.
 
-3. It writes a `1`.
-
-5. It moves one square to the right.
-
-7. It switches to **state B**.
-
-9. In **state B**, it again finds a blank (`0`).
-
-11. It writes a `1`.
-
-13. It moves one square to the right.
-
-15. Now there are no rules left — the machine **halts**.
-
-**Result:** Two `1`s are written next to each other on the tape before stopping.
-
-#### Quick Visual of the Tape Evolution
+**Result:** Two `1`s written side by side, then it stops.
 
 ```
 Initial Tape: [ 0 ][ 0 ][ 0 ]...
 
 Step 1: (State A)
-- Write 1
-- Move right
-- Switch to State B
+- Write 1, move right, switch to State B
 
 Tape: [ 1 ][ 0 ][ 0 ]...
 
 Step 2: (State B)
-- Write 1
-- Move right
-- Halt
+- Write 1, move right, halt
 
 Final Tape: [ 1 ][ 1 ][ 0 ]...
 ```
 
+Tiny, but you can already see how the rules produce meaningful output.
+
 * * *
 
-## What Does "Size" Mean for a Turing Machine?
+## What Does "Size" Mean Here?
 
-Before getting into Busy Beavers, there's one important idea to understand:
+One more concept before we get to Busy Beavers: when I talk about the **size** of a Turing Machine, I mean how many states it has (not counting the halting state).
 
-When I talk about the "**size**" of a Turing Machine, I mean **how many states** it has (excluding the halting state).
-
-For example:
-
-- The simple machine above had **two states**: A and B.
-
-- A machine with **three states** might have states A, B, and C, and so on.
-
-The more states you allow, the more complicated a machine can become.  
-More states mean more possibilities — and even a slight increase can lead to mind-boggling complexity.
+The machine above had two states: A and B. Add a third state and suddenly things get considerably more complex. A slight increase in states leads to a combinatorial explosion in possible behaviors, which is exactly why the Busy Beaver problem is so brutal.
 
 * * *
 
 ## The First Glimpse of the Busy Beaver
 
-Now, imagine:
+Here's the question that kicks everything off:
 
 > **Among all possible Turing Machines with a given number of states, which one writes the most 1s before halting?**
 
-This innocent-sounding question leads straight to the [Busy Beaver Problem](https://en.wikipedia.org/wiki/Busy_beaver), introduced by mathematician [Tibor Radó](https://link.springer.com/article/10.1007/BF01386390) in 1962.
+This is the [Busy Beaver Problem](https://en.wikipedia.org/wiki/Busy_beaver), introduced by mathematician [Tibor Radó](https://link.springer.com/article/10.1007/BF01386390) in 1962. It sounds almost playful. It is not.
 
-And here's the catch:
-
-- Even with just 4 or 5 states, finding the "busiest" machine becomes ridiculously difficult.
-
-- The number of steps or 1s can explode faster than any computable function.
-
-- The Busy Beaver function eventually grows faster than anything a computer could possibly calculate.
+Even with just 4 or 5 states, finding the "busiest" machine becomes genuinely hard. The number of steps and 1s produced can grow faster than any computable function, which means no algorithm can calculate the answer for large numbers of states. Ever.
 
 Simple machines. Infinite complexity.
 
 * * *
 
-## What’s Coming Next
+## What's Coming Next
 
-This is just **Part 1** of my three-part series.
+In **Part 2**, I'll get into the Busy Beaver Problem properly: how it's formally defined, why tiny machines can produce outputs so large they're hard to comprehend, and some legendary Busy Beaver examples that honestly still kind of break my brain.
 
-In **Part 2**, I’ll dive headfirst into the Busy Beaver Problem itself:
-
-- How it’s formally defined.
-
-- Why tiny machines can produce massive outputs.
-
-- A few legendary Busy Beaver examples that will blow your mind.
-
-It’s only going to get wilder from here.
+It only gets wilder from here.

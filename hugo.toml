@@ -2,5 +2,31 @@ baseURL = 'https://chaitalks.tech/'
 languageCode = 'en-us'
 title = 'ChaiTalks.Tech'
 theme = 'PaperMod'
+
 [params]
 author='Chai'
+
+[params.label]
+  icon = "logo.png"
+  iconHeight = 80
+
+[params.homeInfoParams]
+  Title = "Hi, I'm Chai 👋"
+  Content = """
+ChaiTalks.Tech is a place where I talk about interesting things I come across or am currently building.
+I hope you find these as interesting as I do.
+
+Find me online:
+"""
+
+[[params.socialIcons]]
+  name = "github"
+  url = "https://github.com/chaitupendyala"
+
+[[params.socialIcons]]
+  name = "linkedin"
+  url = "https://www.linkedin.com/in/phani-chaitanya-pendyala-88327bba"
+
+[[params.socialIcons]]
+  name = "x"
+  url = "https://x.com/ChaiTalksTech"

@@ -16,31 +16,30 @@ tags:
   - "uv"
 ---
 
-The Machine Control Protocol (MCP) is quickly becoming a preferred interface for integrating AI capabilities into developer tools, terminals, and other interactive environments. In essence, MCP defines a simple, message-based protocol where _tools_ can respond to structured _commands_—enabling dynamic, programmable extensions to your application.
+MCP is quickly becoming the standard way to give AI models access to external tools and data. Instead of parsing raw text like a shell command, MCP tools receive structured JSON with arguments and context, and return structured results. That makes it much easier to build reliable integrations between AI and real systems.
 
-In this article, we’ll walk through how to build your own MCP server using Python. We'll use the [`fastmcp`](https://pypi.org/project/fastmcp/) library for quickly defining and serving tools, and [`uv`](https://github.com/astral-sh/uv), a new blazing-fast Python package manager, to manage dependencies and environments.
+In this post I'll walk through building a simple MCP server in Python using [`fastmcp`](https://pypi.org/project/fastmcp/) and [`uv`](https://github.com/astral-sh/uv). You'll have something running in a few minutes.
 
 * * *
 
 ### What is MCP?
 
-At a high level, MCP (Machine Control Protocol) is a way to extend applications with programmable tools. Think of it like an intelligent command palette that responds to structured inputs. Instead of parsing raw text like a shell or CLI, MCP tools receive JSON-formatted commands with metadata, arguments, and context—and return structured results.
+At a high level, MCP (Model Communication Protocol) is a way to extend applications with programmable tools. Think of it like a command palette that speaks structured JSON instead of raw text. Your tools receive typed inputs with metadata and context, and return structured results that the model can reason about.
 
-This makes it especially powerful for AI integrations, developer tooling, and interactive automation.
+This makes it particularly useful for AI integrations, developer tooling, and anywhere you want an AI to be able to take actions rather than just produce text.
 
 * * *
 
-### Tools We’ll Use
+### Tools We'll Use
 
-1. **[`uv`](https://github.com/astral-sh/uv)** — a fast, modern Python package manager (a drop-in replacement for pip, but written in Rust and much faster).
-
-3. **[`fastmcp`](https://pypi.org/project/fastmcp/)** — a Python library that simplifies building and serving MCP tools using decorators.
+- **[`uv`](https://github.com/astral-sh/uv)** — a fast Python package manager written in Rust. Drop-in replacement for pip, but much faster.
+- **[`fastmcp`](https://pypi.org/project/fastmcp/)** — a Python library that lets you define MCP tools using simple decorators.
 
 * * *
 
 ### Getting Started
 
-#### 1\. Initialize Your Project
+#### 1. Initialize Your Project
 
 ```
 mkdir mcp-server-example
@@ -52,7 +51,7 @@ uv pip install fastmcp
 
 * * *
 
-### 2\. Build the MCP Server
+### 2. Build the MCP Server
 
 Paste this into `main.py`:
 
@@ -75,45 +74,36 @@ if __name__ == "__main__":
     app.serve()
 ```
 
-Then run your server:
+Then run it:
 
 ```
 uv run main.py
 ```
 
-By default, this will start on `http://localhost:8000`.
-
-You now have an MCP server with one tool: `read_file`.
+By default this starts on `http://localhost:8000`. You now have an MCP server with one tool: `read_file`.
 
 * * *
 
-## Integrating with ChatGPT
+## Connecting to ChatGPT
 
-MCP servers can be connected directly to **custom GPTs** using the [**MCP Tools Interface**](https://platform.openai.com/docs/gpts/mcp-tools). Here's how:
+MCP servers can be wired up to **custom GPTs** via the [MCP Tools Interface](https://platform.openai.com/docs/gpts/mcp-tools).
 
-### 1\. Deploy Your Server
+### 1. Make Your Server Publicly Accessible
 
-You’ll need to make your MCP server publicly accessible. Two options:
+Two options:
 
-- **Local testing**: Use [ngrok](https://ngrok.com/) to expose your local server: `grok http 8000`
+- **Local testing**: Use [ngrok](https://ngrok.com/) to expose your local port: `ngrok http 8000`
+- **Production**: Deploy to Render, Fly.io, Railway, or your own VPS.
 
-- **Production**: Deploy it to a platform like Render, Fly.io, Railway, or your VPS.
+This gives you a public URL like `https://abc123.ngrok.io`.
 
-This will give you a public URL like `https://abc123.ngrok.io`.
-
-* * *
-
-### 2\. Create a Custom GPT
+### 2. Create a Custom GPT
 
 1. Go to [ChatGPT → Explore GPTs](https://chat.openai.com/gpts/explore)
-
-3. Click **Create** → fill out basic info
-
-5. Under **"Add Actions"**, choose **"MCP"**
-
-7. Paste your MCP server URL (e.g. `https://abc123.ngrok.io`)
-
-9. The GPT will auto-discover tools like `read_file`!
+2. Click **Create** and fill out the basic info
+3. Under **"Add Actions"**, choose **"MCP"**
+4. Paste your server URL
+5. ChatGPT auto-discovers your tools
 
 Now you can chat with your GPT like:
 
@@ -121,13 +111,13 @@ Now you can chat with your GPT like:
 Can you show me what's in my config.txt file?
 ```
 
-Behind the scenes, ChatGPT turns this into a tool call to `read_file(filename="config.txt")` and shows the result.
+Behind the scenes, ChatGPT turns that into a call to `read_file(filename="config.txt")` and shows you the result.
 
 * * *
 
-## Extending Your MCP Server
+## Adding More Tools
 
-You can define multiple tools in your MCP server using the same pattern:
+Same pattern, just add more decorated functions:
 
 ```
 @app.tool(name="list_files", description="Lists files in a directory.")
@@ -139,34 +129,24 @@ def list_files(directory: str = ".") -> list[str]:
         return [f"Error: {str(e)}"]
 ```
 
-These tools become immediately usable inside ChatGPT or other MCP clients—without writing any extra frontend or CLI parsing logic.
+These become immediately usable inside ChatGPT or any other MCP client, no extra CLI parsing or frontend work needed.
 
 * * *
 
-## Possibilities and Use Cases
+## What You Can Build With This
 
-Here’s where it gets interesting:
+A few directions worth exploring:
 
-- **Developer assistants**: Expose project-specific tools like `run_tests`, `lint_code`, or `deploy_app`.
+- **Developer assistants**: Expose tools like `run_tests`, `lint_code`, or `deploy_app` so an AI can help with your actual workflow.
+- **Personal agents**: Let ChatGPT read files, query a database, or call your own APIs.
+- **Automation**: Wire up MCP tools to infrastructure and let an AI drive operations tasks.
 
-- **Personal AI agents**: Let ChatGPT control files, databases, web APIs, or smart home tools.
-
-- **Serverless operations**: Run simple MCP tools in containers or lambdas and connect on-demand.
-
-- **AI Automation**: Turn ChatGPT into a programmable agent over your infrastructure.
-
-You can even add **auth**, **context-awareness**, or connect to your own APIs and databases to power workflows with intelligence and control.
+You can layer in auth, connect to databases, or chain tools together to build workflows that are actually useful rather than just demos.
 
 * * *
 
 ## Final Thoughts
 
-With just a few lines of Python, you’ve built a powerful, extensible interface between code and AI. The combination of **FastMCP** and **ChatGPT’s MCP support** opens a new era of developer productivity and custom AI tooling.
+FastMCP makes it pretty low-friction to get an MCP server running. The interesting part starts when you think seriously about what tools to expose and how to make them reliable. But the plumbing itself is surprisingly approachable.
 
-Want to go further? Try combining:
-
-- `openai` API for LLM-powered responses inside your tools
-
-- database tools like `sqlite3` or `SQLAlchemy`
-
-- automation packages like `subprocess`, `paramiko`, or `requests`
+If you want to extend it further, try combining the `openai` SDK for LLM-powered logic inside tools, `sqlite3` or SQLAlchemy for database access, or `subprocess` for running shell commands in a controlled way.
