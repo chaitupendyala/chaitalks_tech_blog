@@ -1,0 +1,82 @@
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--gap);
+  margin-top: calc(var(--gap) * 1.5);
+}
+
+.app-card {
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.app-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.app-card:active {
+  transform: translateY(0);
+}
+
+.app-card-body {
+  padding: var(--gap);
+  flex: 1;
+}
+
+.app-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: var(--primary);
+}
+
+.app-description {
+  color: var(--secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+}
+
+.app-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.app-tag {
+  background: var(--tertiary);
+  color: var(--secondary);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+}
+
+.app-card-footer {
+  padding: calc(var(--gap) * 0.75) var(--gap);
+  border-top: 1px solid var(--border);
+}
+
+.app-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.app-link:hover {
+  text-decoration: underline;
+}
+
+.app-link svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}

@@ -1,0 +1,10 @@
+{
+  "apps": [
+    {
+      "name": "VitaeVault",
+      "description": "An AI-powered resume builder. Upload your existing resume, paste a job description, and VitaeVault selects your best experiences and projects, rewrites them for clarity with AI, and generates a tailored resume.",
+      "url": "https://vitaevault.chaitalks.tech",
+      "tags": ["resume", "ai", "web-app"]
+    }
+  ]
+}

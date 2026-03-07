@@ -30,3 +30,8 @@ Find me online:
 [[params.socialIcons]]
   name = "x"
   url = "https://x.com/ChaiTalksTech"
+
+[[menus.main]]
+  name = "Apps"
+  url = "/apps/"
+  weight = 2
