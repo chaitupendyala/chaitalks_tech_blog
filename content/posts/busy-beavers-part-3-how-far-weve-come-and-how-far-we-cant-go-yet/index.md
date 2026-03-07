@@ -16,7 +16,7 @@ tags:
   - "theory-of-computation"
 ---
 
-In [Part 1](https://chaitalks.tech/busy-beavers-part-1-what-is-a-turing-machine/) and [Part 2](https://chaitalks.tech/busy-beavers-part-2-diving-deeper/) of this series, we set up the question: given a Turing machine with n states running on a blank tape, what's the maximum number of steps it can take before halting? We saw how that clean, finite-sounding question leads directly into undecidability, incompleteness, and the outer edge of what's knowable.
+In [Part 1](https://chaitalks.tech/posts/busy-beavers-part-1-what-is-a-turing-machine/) and [Part 2](https://chaitalks.tech/posts/busy-beavers-part-2-diving-deeper/) of this series, we set up the question: given a Turing machine with n states running on a blank tape, what's the maximum number of steps it can take before halting? We saw how that clean, finite-sounding question leads directly into undecidability, incompleteness, and the outer edge of what's knowable.
 
 Now let's look at where things actually stand.
 

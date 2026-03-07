@@ -21,7 +21,7 @@ Welcome to part two of my three-part series on the **Busy Beaver problem**.
 
 ### A Quick Recap
 
-If you haven't read [Part 1](https://chaitalks.tech/busy-beavers-part-1-what-is-a-turing-machine/) yet, here's the short version.
+If you haven't read [Part 1](https://chaitalks.tech/posts/busy-beavers-part-1-what-is-a-turing-machine/) yet, here's the short version.
 
 A **Turing machine** is a minimal model of computation: an infinite tape, a read/write head, a set of states, and a set of rules. Despite how simple that sounds, Turing machines are powerful enough to simulate any algorithm. A machine is said to **halt** if it eventually reaches a state where it stops executing. Some machines halt, some run forever, and here's the uncomfortable part: in general, you can't tell which is which without just watching.
 
