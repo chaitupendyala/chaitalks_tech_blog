@@ -13,3 +13,15 @@
     padding: 8px 0;
   }
 </style>
+
+{{- /* Explicit Open Graph fallbacks for pages missing cover images */}}
+{{- $ogImage := "https://chaitalks.tech/logo.png" }}
+{{- with .Params.cover.image }}{{ $ogImage = . | absURL }}{{ end }}
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:image" content="{{ $ogImage }}">
+<meta property="og:locale" content="en_US">
+{{- if .IsPage }}
+<meta property="article:author" content="https://www.linkedin.com/in/phani-chaitanya-pendyala-88327bba">
+{{- with .Date }}<meta property="article:published_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
+{{- with .Lastmod }}<meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
+{{- end }}

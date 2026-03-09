@@ -4,7 +4,13 @@ title = 'ChaiTalks.Tech'
 theme = 'PaperMod'
 
 [params]
-author='Chai'
+env = 'production'
+author = 'Chai'
+description = 'ChaiTalks.Tech — Chai writes about AI, software, and interesting things he is building.'
+keywords = ['AI', 'software', 'technology', 'MCP', 'LLM', 'developer', 'blog']
+
+[params.schema]
+publisherType = 'Person'
 
 [params.label]
   icon = "logo.png"
