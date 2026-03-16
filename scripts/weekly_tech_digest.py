@@ -149,20 +149,27 @@ Return your response as a JSON object with this exact schema:
 
 
 def generate_cover_image(digest_data, post_dir):
-    """Use DALL-E to generate a cover image based on the week's themes."""
-    category_names = [c["name"] for c in digest_data.get("categories", [])]
-    top_titles = []
+    """Use DALL-E to generate a cover image based on the week's top stories."""
+    # Collect top story summaries for a more specific image
+    top_stories = []
     for cat in digest_data.get("categories", []):
         for story in cat.get("stories", [])[:2]:
-            top_titles.append(story["title"])
+            top_stories.append(
+                f"- {story['title']}: {story.get('summary', '')}"
+            )
+
+    stories_context = "\n".join(top_stories[:5])
 
     prompt = (
-        "A modern, minimal, abstract digital illustration for a weekly tech news blog post. "
-        "The image should subtly evoke themes of: "
-        f"{', '.join(category_names)}. "
-        f"Inspired by topics like: {', '.join(top_titles[:4])}. "
-        "Use a clean, professional color palette with blues, purples, and warm accents. "
-        "No text, no logos, no words. Abstract and editorial in style."
+        "Create a vivid, photorealistic editorial illustration for a tech news article cover. "
+        "The image should visually represent these specific stories:\n"
+        f"{stories_context}\n\n"
+        "Show recognizable visual elements: company logos as physical objects, "
+        "country landmarks, devices, or silhouettes of people in relevant settings. "
+        "For example, if a story is about Apple, show an Apple product; if about a country's tech policy, "
+        "show that country's landmark. Make it feel like a magazine cover photo collage. "
+        "Absolutely NO text, NO words, NO letters, NO labels anywhere in the image. "
+        "Use dramatic lighting, rich colors, and a cinematic editorial photography style."
     )
 
     client = openai.OpenAI()
@@ -194,7 +201,14 @@ def render_markdown(digest_data, digest_date, cover_image=None):
 
     # Frontmatter
     tags_yaml = "\n".join(f'  - "{t}"' for t in all_tags)
-    cover_yaml = f'\ncoverImage: "{cover_image}"' if cover_image else ""
+    cover_yaml = ""
+    if cover_image:
+        cover_yaml = f"""
+cover:
+  image: "{cover_image}"
+  alt: "{title}"
+  relative: true"""
+
     frontmatter = f"""---
 title: "{title}"
 date: {date_str}
