@@ -123,48 +123,7 @@ Return your response as a JSON object with this exact schema:
     return json.loads(response.choices[0].message.content)
 
 
-def generate_cover_image(digest_data, post_dir):
-    """Use DALL-E to generate a cover image based on the week's top stories."""
-    # Collect top story summaries for a more specific image
-    top_stories = []
-    for cat in digest_data.get("categories", []):
-        for story in cat.get("stories", [])[:2]:
-            top_stories.append(
-                f"- {story['title']}: {story.get('summary', '')}"
-            )
-
-    stories_context = "\n".join(top_stories[:5])
-
-    prompt = (
-        "Create a vivid, photorealistic editorial illustration for a tech news article cover. "
-        "The image should visually represent these specific stories:\n"
-        f"{stories_context}\n\n"
-        "Show recognizable visual elements: company logos as physical objects, "
-        "country landmarks, devices, or silhouettes of people in relevant settings. "
-        "For example, if a story is about Apple, show an Apple product; if about a country's tech policy, "
-        "show that country's landmark. Make it feel like a magazine cover photo collage. "
-        "Absolutely NO text, NO words, NO letters, NO labels anywhere in the image. "
-        "Use dramatic lighting, rich colors, and a cinematic editorial photography style."
-    )
-
-    client = openai.OpenAI()
-    response = client.images.generate(
-        model="dall-e-3",
-        prompt=prompt,
-        size="1792x1024",
-        quality="standard",
-        n=1,
-    )
-
-    image_url = response.data[0].url
-    image_data = requests.get(image_url, timeout=60).content
-
-    image_path = post_dir / "cover.png"
-    image_path.write_bytes(image_data)
-    return "cover.png"
-
-
-def render_markdown(digest_data, digest_date, cover_image=None):
+def render_markdown(digest_data, digest_date):
     """Render the digest data as a Hugo-compatible markdown post."""
     date_str = digest_date.strftime("%Y-%m-%d")
     title = f"Weekly Tech Digest - {digest_date.strftime('%B %d, %Y')}"
@@ -176,15 +135,6 @@ def render_markdown(digest_data, digest_date, cover_image=None):
 
     # Frontmatter
     tags_yaml = "\n".join(f'  - "{t}"' for t in all_tags)
-    cover_yaml = ""
-    if cover_image:
-        cover_yaml = f"""
-cover:
-  image: "{cover_image}"
-  alt: "{title}"
-  relative: true
-  hidden: true"""
-
     frontmatter = f"""---
 title: "{title}"
 date: {date_str}
@@ -192,7 +142,7 @@ description: "A curated weekly roundup of the most interesting stories in tech"
 tags:
 {tags_yaml}
 categories:
-  - "tech-news"{cover_yaml}
+  - "tech-news"
 ---"""
 
     # Body
@@ -253,21 +203,12 @@ def main():
         print(f"Error generating digest: {e}", file=sys.stderr)
         sys.exit(1)
 
-    # Create post directory early so we can save the cover image into it
     slug = f"weekly-tech-digest-{digest_date.strftime('%Y-%m-%d')}"
     post_dir = CONTENT_DIR / slug
     post_dir.mkdir(parents=True, exist_ok=True)
 
-    print("Generating cover image with DALL-E...")
-    cover_image = None
-    try:
-        cover_image = generate_cover_image(digest_data, post_dir)
-    except (openai.OpenAIError, requests.RequestException) as e:
-        print(f"Warning: Could not generate cover image: {e}", file=sys.stderr)
-        print("Continuing without cover image...")
-
     print("Generating markdown post...")
-    markdown = render_markdown(digest_data, digest_date, cover_image)
+    markdown = render_markdown(digest_data, digest_date)
 
     print("Writing post file...")
     post_file = post_dir / "index.md"
