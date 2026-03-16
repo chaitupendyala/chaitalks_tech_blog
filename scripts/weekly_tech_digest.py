@@ -10,6 +10,7 @@ import sys
 import time
 import datetime
 import pathlib
+from urllib.parse import quote_plus
 
 import requests
 import openai
@@ -179,9 +180,11 @@ categories:
             if comments:
                 meta_parts.append(f"{comments} comments")
             meta = " | ".join(meta_parts)
+            search_url = f"https://www.google.com/search?q={quote_plus(story['title'])}"
             body_parts.append(
                 f"[Read the article]({story['url']}) · "
-                f"[HN Discussion]({story['hn_url']})"
+                f"[HN Discussion]({story['hn_url']}) · "
+                f"[Read more]({search_url})"
                 + (f" ({meta})" if meta else "")
                 + "\n"
             )
