@@ -88,16 +88,21 @@ def generate_digest(stories, digest_date):
         for i, s in enumerate(stories)
     )
 
-    system_prompt = """You are a tech journalist writing a weekly digest for a developer blog.
-You will receive a list of top Hacker News stories from the past week.
+    system_prompt = """You are a friendly tech writer for a developer blog. You write like a real person — casual, clear, and easy to follow. No corporate jargon, no buzzwords, no filler. Just plain language that anyone in tech can enjoy reading.
+
+You will receive a list of trending tech stories from the past week.
 
 Your task:
-1. Select the 10 most significant and interesting stories.
-2. Group them into 3-5 thematic categories (e.g., "AI and Machine Learning",
-   "Programming and Developer Tools", "Security", "Open Source", "Industry News").
-3. For each story, write a 2-3 sentence summary explaining what happened and why it matters.
-4. Write a 2-3 sentence intro paragraph for the weekly digest.
-5. Suggest relevant tags (lowercase, hyphenated, e.g. "machine-learning").
+1. Select the 15 most significant and interesting stories.
+2. Place each story into one of these EXACT four categories:
+   - "Technology and Tools" — new tools, frameworks, languages, hardware, infrastructure
+   - "Open Source and Development" — open source projects, developer workflows, coding practices
+   - "AI News" — anything related to AI, LLMs, machine learning, data science
+   - "Notable Voices" — opinions, hot takes, or notable statements from well-known people in tech (founders, engineers, researchers, etc.). If someone important said something interesting or controversial, it goes here.
+3. For each story, write a 2-3 sentence summary. Write naturally — like you're telling a friend about it over coffee. Keep it simple and conversational. Do NOT sound like AI or a press release. Avoid phrases like "This marks a significant", "This development", "notable for its", etc.
+4. Write a short, friendly intro paragraph (2-3 sentences) for the weekly digest. Do NOT mention Hacker News as the source.
+5. Write 3-4 thought-provoking questions at the end that make readers think about the week's news. These should be open-ended and genuinely interesting, not generic.
+6. Suggest relevant tags (lowercase, hyphenated, e.g. "machine-learning").
 
 Return your response as a JSON object with this exact schema:
 {
@@ -117,6 +122,7 @@ Return your response as a JSON object with this exact schema:
       ]
     }
   ],
+  "questions": ["question1", "question2", "question3"],
   "tags": ["tag1", "tag2"]
 }"""
 
@@ -148,7 +154,7 @@ def render_markdown(digest_data, digest_date):
     title = f"Weekly Tech Digest - {digest_date.strftime('%B %d, %Y')}"
 
     # Build tags list
-    base_tags = ["weekly-digest", "tech-news", "hacker-news"]
+    base_tags = ["weekly-digest", "tech-news"]
     extra_tags = digest_data.get("tags", [])
     all_tags = sorted(set(base_tags + extra_tags))
 
@@ -157,7 +163,7 @@ def render_markdown(digest_data, digest_date):
     frontmatter = f"""---
 title: "{title}"
 date: {date_str}
-description: "This week's top tech stories from Hacker News, curated and summarized"
+description: "A curated weekly roundup of the most interesting stories in tech"
 tags:
 {tags_yaml}
 categories:
@@ -188,6 +194,14 @@ categories:
                 + (f" ({meta})" if meta else "")
                 + "\n"
             )
+
+    # Questions section
+    questions = digest_data.get("questions", [])
+    if questions:
+        body_parts.append("\n## Something to Think About\n")
+        for q in questions:
+            body_parts.append(f"- {q}")
+        body_parts.append("")
 
     return frontmatter + "\n\n" + "\n".join(body_parts)
 
