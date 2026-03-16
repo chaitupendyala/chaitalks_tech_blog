@@ -207,7 +207,8 @@ def render_markdown(digest_data, digest_date, cover_image=None):
 cover:
   image: "{cover_image}"
   alt: "{title}"
-  relative: true"""
+  relative: true
+  hidden: true"""
 
     frontmatter = f"""---
 title: "{title}"
