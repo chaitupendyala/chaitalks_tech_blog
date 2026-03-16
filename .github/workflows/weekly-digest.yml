@@ -1,0 +1,48 @@
+name: Weekly Tech Digest
+
+on:
+  schedule:
+    - cron: '0 12 * * 0' # Every Sunday at noon UTC
+  workflow_dispatch: # Manual trigger
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate-digest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Generate weekly digest
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python scripts/weekly_tech_digest.py
+
+      - name: Get date for branch name
+        id: date
+        run: echo "date=$(date +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Add weekly tech digest for ${{ steps.date.outputs.date }}"
+          branch: "weekly-digest/${{ steps.date.outputs.date }}"
+          title: "Weekly Tech Digest - ${{ steps.date.outputs.date }}"
+          body: |
+            Automated weekly tech digest generated from top Hacker News stories.
+
+            Please review the generated content before merging.
+          labels: automated,content
+          delete-branch: true
