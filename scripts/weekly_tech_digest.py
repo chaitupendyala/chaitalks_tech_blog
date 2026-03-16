@@ -19,61 +19,36 @@ import openai
 REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent
 CONTENT_DIR = REPO_ROOT / "content" / "posts"
 
-# Hacker News API
-HN_API = "https://hacker-news.firebaseio.com/v0"
-TOP_N_FETCH = 50
-REQUEST_DELAY = 0.05  # 50ms between HN API calls
+# Algolia HN Search API (supports time-range queries)
+HN_SEARCH_API = "https://hn.algolia.com/api/v1/search"
 
 # OpenAI
 OPENAI_MODEL = "gpt-4o"
 
 
-def fetch_top_story_ids():
-    """Fetch the list of top story IDs from Hacker News."""
-    resp = requests.get(f"{HN_API}/topstories.json", timeout=15)
+def get_recent_top_stories(n=50):
+    """Fetch top HN stories from the past 7 days using Algolia search API."""
+    cutoff = int(time.time() - 7 * 86400)
+
+    resp = requests.get(HN_SEARCH_API, params={
+        "tags": "story",
+        "numericFilters": f"created_at_i>{cutoff},points>10",
+        "hitsPerPage": n,
+    }, timeout=15)
     resp.raise_for_status()
-    return resp.json()
-
-
-def fetch_item(item_id):
-    """Fetch a single item from Hacker News by ID."""
-    resp = requests.get(f"{HN_API}/item/{item_id}.json", timeout=15)
-    resp.raise_for_status()
-    time.sleep(REQUEST_DELAY)
-    return resp.json()
-
-
-def get_recent_top_stories(n=TOP_N_FETCH):
-    """Fetch top HN stories from the past 7 days, sorted by score."""
-    story_ids = fetch_top_story_ids()
-    cutoff = time.time() - 7 * 86400  # 7 days ago
 
     stories = []
-    for story_id in story_ids:
-        if len(stories) >= n:
-            break
-
-        try:
-            item = fetch_item(story_id)
-        except (requests.RequestException, json.JSONDecodeError):
+    for hit in resp.json().get("hits", []):
+        url = hit.get("url")
+        if not url:
             continue
-
-        if item is None:
-            continue
-        if item.get("type") != "story":
-            continue
-        if item.get("time", 0) < cutoff:
-            continue
-        if not item.get("url"):
-            continue
-
         stories.append({
-            "title": item.get("title", "Untitled"),
-            "url": item["url"],
-            "score": item.get("score", 0),
-            "comments": item.get("descendants", 0),
-            "author": item.get("by", "unknown"),
-            "hn_url": f"https://news.ycombinator.com/item?id={item['id']}",
+            "title": hit.get("title", "Untitled"),
+            "url": url,
+            "score": hit.get("points", 0),
+            "comments": hit.get("num_comments", 0),
+            "author": hit.get("author", "unknown"),
+            "hn_url": f"https://news.ycombinator.com/item?id={hit['objectID']}",
         })
 
     stories.sort(key=lambda s: s["score"], reverse=True)
