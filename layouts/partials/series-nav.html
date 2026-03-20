@@ -1,0 +1,21 @@
+{{- /* Series Navigation: auto-detects posts sharing the same "series" frontmatter param */ -}}
+{{- with .Params.series }}
+{{- $seriesName := . }}
+{{- $seriesPosts := where site.RegularPages ".Params.series" $seriesName }}
+{{- if gt (len $seriesPosts) 1 }}
+<nav class="series-nav" aria-label="Series navigation">
+  <p class="series-nav-header">{{ $seriesName }}</p>
+  <ol class="series-nav-list">
+    {{- range $seriesPosts }}
+    <li{{ if eq $.Permalink .Permalink }} class="current"{{ end }}>
+      {{- if eq $.Permalink .Permalink }}
+      {{ .Title }}
+      {{- else }}
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+      {{- end }}
+    </li>
+    {{- end }}
+  </ol>
+</nav>
+{{- end }}
+{{- end }}

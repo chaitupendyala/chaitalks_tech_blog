@@ -13,6 +13,7 @@ tags:
   - "number-theory-potential-connection-due-to-rapid-growth"
   - "state-machine"
   - "theory-of-computation"
+series: "Busy Beavers Series"
 ---
 
 Welcome to part two of my three-part series on the **Busy Beaver problem**.

@@ -1,0 +1,22 @@
+{
+  "projects": [
+    {
+      "name": "ChaiTalks.Tech Blog Features",
+      "description": "Adding search, series navigation, reading progress, and more interactive features to the blog.",
+      "status": "Building",
+      "tags": ["hugo", "css", "javascript"]
+    },
+    {
+      "name": "Weekly Tech Digest Automation",
+      "description": "An automated pipeline that curates top Hacker News stories, summarizes them with AI, and publishes a weekly digest every Sunday.",
+      "status": "Shipped",
+      "tags": ["python", "openai", "github-actions"]
+    },
+    {
+      "name": "VitaeVault",
+      "description": "AI-powered resume builder that tailors your resume to specific job descriptions.",
+      "status": "Shipped",
+      "tags": ["ai", "web-app", "resume"]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{{- define "main" }}
+<article class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">{{ .Title }}</h1>
+    {{- if .Description }}
+    <div class="post-description">{{ .Description }}</div>
+    {{- end }}
+  </header>
+
+  <div class="post-content">
+    {{- range site.Data.bookshelf.categories }}
+    <div class="bookshelf-category">
+      <h2>{{ .name }}</h2>
+      <div class="bookshelf-grid">
+        {{- range .items }}
+        <div class="bookshelf-card">
+          <h3 class="bookshelf-card-title">{{ .title }}</h3>
+          <p class="bookshelf-card-author">{{ .author }}</p>
+          <p class="bookshelf-card-take">{{ .take }}</p>
+          <span class="bookshelf-card-type">{{ .type }}</span>
+          {{- if .link }}
+          <br><a class="bookshelf-card-link" href="{{ .link }}" {{ if not (hasPrefix .link "/") }}target="_blank" rel="noopener noreferrer"{{ end }}>Check it out &rarr;</a>
+          {{- end }}
+        </div>
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+  </div>
+</article>
+{{- end }}

@@ -1,0 +1,31 @@
+{{- define "main" }}
+<article class="post-single digest-page">
+  <header class="post-header">
+    <h1 class="post-title">{{ .Title }}</h1>
+    {{- if .Description }}
+    <div class="post-description">{{ .Description }}</div>
+    {{- end }}
+  </header>
+
+  <div class="post-content">
+    <p class="digest-intro">
+      Published every Sunday at noon UTC. Powered by an automated pipeline that pulls the week's top stories from Hacker News and summarizes them with AI.
+      Subscribe via <a href="/index.xml">RSS</a> to never miss an issue.
+    </p>
+
+    <ul class="digest-list">
+      {{- $digestPosts := where site.RegularPages "Params.tags" "intersect" (slice "weekly-digest") }}
+      {{- if not $digestPosts }}
+        {{- /* Fallback: match by title pattern */ -}}
+        {{- $digestPosts = where site.RegularPages ".Title" "like" "Weekly Tech Digest%" }}
+      {{- end }}
+      {{- range $digestPosts.ByDate.Reverse }}
+      <li>
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+        <span class="digest-date">{{ .Date | time.Format ":date_long" }}</span>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+</article>
+{{- end }}
