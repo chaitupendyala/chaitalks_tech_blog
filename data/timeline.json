@@ -1,0 +1,46 @@
+{
+  "milestones": [
+    {
+      "date": "2025",
+      "title": "Launched ChaiTalks.Tech",
+      "description": "Started this blog to share what I learn and build. First posts explored vibe coding and the future of AI-assisted development.",
+      "tags": ["blogging", "ai"],
+      "link": "/posts/the-code-writes-itself-welcome-to-the-vibe-coding-era/"
+    },
+    {
+      "date": "2025",
+      "title": "Busy Beavers Deep Dive",
+      "description": "Wrote a three-part series on the Busy Beaver problem — from Turing machines to the limits of computation. One of my favorite things I've written.",
+      "tags": ["computer-science", "writing"],
+      "link": "/posts/busy-beavers-part-1-what-is-a-turing-machine/"
+    },
+    {
+      "date": "2025",
+      "title": "Explored MCP Protocol",
+      "description": "Dove into the Model Context Protocol — wrote about integrating AI into applications and built an MCP server with Python and FastMCP.",
+      "tags": ["ai", "mcp", "python"],
+      "link": "/posts/building-an-mcp-server-with-python-and-fastmcp/"
+    },
+    {
+      "date": "2025",
+      "title": "Built VitaeVault",
+      "description": "Created an AI-powered resume builder that tailors resumes to job descriptions. My first shipped side project on the chaitalks.tech domain.",
+      "tags": ["ai", "side-project", "web-app"],
+      "link": "https://vitaevault.chaitalks.tech",
+      "external": true
+    },
+    {
+      "date": "2026",
+      "title": "Tesla HUD for Android",
+      "description": "Turned an old Android phone into a heads-up display for my car — showing speed, speed limits, and navigation info in a Tesla-inspired minimal UI.",
+      "tags": ["android", "kotlin", "side-project"],
+      "link": "/posts/tesla-hud/"
+    },
+    {
+      "date": "2026",
+      "title": "Automated Weekly Tech Digest",
+      "description": "Built a system that automatically curates the week's top tech stories from Hacker News, summarizes them with AI, and publishes a digest every Sunday.",
+      "tags": ["automation", "ai", "python"]
+    }
+  ]
+}

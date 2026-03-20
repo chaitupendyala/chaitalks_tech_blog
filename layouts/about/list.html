@@ -1,0 +1,55 @@
+{{- define "main" }}
+<article class="post-single about-page">
+  <header class="post-header">
+    <h1 class="post-title">{{ .Title }}</h1>
+    {{- if .Description }}
+    <div class="post-description">{{ .Description }}</div>
+    {{- end }}
+  </header>
+
+  <div class="about-intro">
+    <div class="about-avatar">
+      <img src="/logo.png" alt="Chai" />
+    </div>
+    <div class="about-bio">
+      <p>Hey, I'm <strong>Chai</strong> (Phani Chaitanya Pendyala). I'm a software engineer who loves building things and exploring ideas at the intersection of AI, systems, and developer tools.</p>
+      <p>ChaiTalks.Tech is where I write about the things that fascinate me — from the limits of computation to building heads-up displays for my car. I believe the best way to understand something is to explain it to someone else.</p>
+      <div class="about-social">
+        <a href="https://github.com/chaitupendyala" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/phani-chaitanya-pendyala-88327bba" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://x.com/ChaiTalksTech" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="about-section-title">The Journey So Far</h2>
+
+  <div class="timeline">
+    {{- range site.Data.timeline.milestones }}
+    <div class="timeline-item">
+      <div class="timeline-marker"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">{{ .date }}</span>
+        <h3 class="timeline-title">{{ .title }}</h3>
+        <p class="timeline-description">{{ .description }}</p>
+        {{- if .tags }}
+        <div class="timeline-tags">
+          {{- range .tags }}
+          <span class="timeline-tag">{{ . }}</span>
+          {{- end }}
+        </div>
+        {{- end }}
+        {{- if .link }}
+        <a href="{{ .link }}" class="timeline-link" {{ if .external }}target="_blank" rel="noopener noreferrer"{{ end }}>Read more &rarr;</a>
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+  </div>
+
+  <div class="about-cta">
+    <h2>Want to stay in the loop?</h2>
+    <p>I publish new posts regularly and send out a <a href="/posts/my-weekly-tech-dive-inspired-by-a-decade-of-dedication/">weekly tech digest</a> every Sunday. Follow along on <a href="https://x.com/ChaiTalksTech" target="_blank" rel="noopener noreferrer">X</a> or subscribe to the <a href="/index.xml">RSS feed</a>.</p>
+  </div>
+</article>
+{{- end }}

@@ -1,0 +1,23 @@
+{{- with site.Data.now.projects }}
+<div class="now-dashboard">
+  <h2>What I'm Building Now</h2>
+  <div class="now-grid">
+    {{- range . }}
+    <div class="now-card">
+      <div class="now-card-header">
+        <h3 class="now-card-title">{{ .name }}</h3>
+        <span class="now-status {{ .status | lower }}">{{ .status }}</span>
+      </div>
+      <p class="now-card-description">{{ .description }}</p>
+      {{- if .tags }}
+      <div class="now-card-tags">
+        {{- range .tags }}
+        <span class="now-card-tag">{{ . }}</span>
+        {{- end }}
+      </div>
+      {{- end }}
+    </div>
+    {{- end }}
+  </div>
+</div>
+{{- end }}

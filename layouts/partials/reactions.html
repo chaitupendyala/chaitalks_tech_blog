@@ -1,0 +1,33 @@
+{{- /* Emoji-based post reactions (localStorage-backed) */ -}}
+<div class="post-reactions" data-post="{{ .RelPermalink }}">
+  <button class="reaction-btn" data-reaction="useful" aria-label="Mark as useful">
+    <span class="reaction-emoji">&#128161;</span> Useful <span class="reaction-count"></span>
+  </button>
+  <button class="reaction-btn" data-reaction="mind-blown" aria-label="Mark as mind-blown">
+    <span class="reaction-emoji">&#129327;</span> Mind-blown <span class="reaction-count"></span>
+  </button>
+  <button class="reaction-btn" data-reaction="well-written" aria-label="Mark as well-written">
+    <span class="reaction-emoji">&#9997;&#65039;</span> Well-written <span class="reaction-count"></span>
+  </button>
+  <button class="reaction-btn" data-reaction="want-more" aria-label="Want more content like this">
+    <span class="reaction-emoji">&#128640;</span> Want more <span class="reaction-count"></span>
+  </button>
+</div>
+<script>
+(function() {
+  var container = document.querySelector('.post-reactions');
+  if (!container) return;
+  var postKey = 'reactions:' + container.dataset.post;
+  var reacted = JSON.parse(localStorage.getItem(postKey) || '{}');
+
+  container.querySelectorAll('.reaction-btn').forEach(function(btn) {
+    var r = btn.dataset.reaction;
+    if (reacted[r]) btn.classList.add('reacted');
+    btn.addEventListener('click', function() {
+      reacted[r] = !reacted[r];
+      btn.classList.toggle('reacted');
+      localStorage.setItem(postKey, JSON.stringify(reacted));
+    });
+  });
+})();
+</script>

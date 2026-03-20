@@ -31,6 +31,7 @@ tags:
   - "tibor-rado"
   - "turing-machine"
 coverImage: "image.png"
+series: "Busy Beavers Series"
 ---
 
 Welcome to the first post in my three-part series on one of the most fascinating problems in all of mathematics and computer science: the **Busy Beaver Problem**.

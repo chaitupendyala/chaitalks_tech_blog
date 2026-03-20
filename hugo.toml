@@ -3,11 +3,18 @@ languageCode = 'en-us'
 title = 'ChaiTalks.Tech'
 theme = 'PaperMod'
 
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+
 [params]
 env = 'production'
 author = 'Chai'
 description = 'ChaiTalks.Tech — Chai writes about AI, software, and interesting things he is building.'
 keywords = ['AI', 'software', 'technology', 'MCP', 'LLM', 'developer', 'blog']
+ShowReadingTime = true
+ShowShareButtons = true
+ShowPostNavLinks = true
+comments = true
 
 [params.schema]
 publisherType = 'Person'
@@ -37,7 +44,26 @@ Find me online:
   name = "x"
   url = "https://x.com/ChaiTalksTech"
 
+[[params.socialIcons]]
+  name = "rss"
+  url = "/index.xml"
+
+[[menus.main]]
+  name = "Search"
+  url = "/search/"
+  weight = 1
+
 [[menus.main]]
   name = "Apps"
   url = "/apps/"
   weight = 2
+
+[[menus.main]]
+  name = "Bookshelf"
+  url = "/bookshelf/"
+  weight = 3
+
+[[menus.main]]
+  name = "About"
+  url = "/about/"
+  weight = 4
