@@ -6,3 +6,70 @@
     Or subscribe via <a href="/index.xml" target="_blank">RSS feed</a>
   </div>
 </div>
+
+{{- /* Notification bell + service worker */ -}}
+<div id="notify-banner" class="notify-banner" style="display:none;">
+  <button id="notify-btn" class="notify-btn" aria-label="Enable notifications">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+      <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+    </svg>
+    <span id="notify-text">Get notified of new posts</span>
+  </button>
+</div>
+
+<script>
+(function() {
+  if (!('serviceWorker' in navigator) || !('Notification' in window)) return;
+
+  var banner = document.getElementById('notify-banner');
+  var btn = document.getElementById('notify-btn');
+  var text = document.getElementById('notify-text');
+
+  function updateUI() {
+    if (Notification.permission === 'granted') {
+      text.textContent = 'Notifications enabled';
+      btn.classList.add('notify-enabled');
+      btn.disabled = true;
+    } else if (Notification.permission === 'denied') {
+      banner.style.display = 'none';
+      return;
+    }
+    banner.style.display = '';
+  }
+
+  updateUI();
+
+  btn.addEventListener('click', function() {
+    Notification.requestPermission().then(function(permission) {
+      if (permission === 'granted') {
+        navigator.serviceWorker.register('/sw-notify.js').then(function(reg) {
+          updateUI();
+          // Trigger initial content check to seed known URLs
+          if (reg.active) {
+            reg.active.postMessage({ type: 'CHECK_NEW_CONTENT' });
+          } else {
+            navigator.serviceWorker.ready.then(function(r) {
+              r.active.postMessage({ type: 'CHECK_NEW_CONTENT' });
+            });
+          }
+        });
+      }
+      updateUI();
+    });
+  });
+
+  // If already granted, register SW and check periodically
+  if (Notification.permission === 'granted') {
+    navigator.serviceWorker.register('/sw-notify.js').then(function() {
+      navigator.serviceWorker.ready.then(function(reg) {
+        reg.active.postMessage({ type: 'CHECK_NEW_CONTENT' });
+        // Check every hour while the page is open
+        setInterval(function() {
+          reg.active.postMessage({ type: 'CHECK_NEW_CONTENT' });
+        }, 60 * 60 * 1000);
+      });
+    });
+  }
+})();
+</script>
