@@ -13,6 +13,7 @@ tags:
   - "weekly-digest"
 categories:
   - "tech-news"
+comments: true
 ---
 
 Hey there, tech enthusiasts! This week, we've got a lot to unpack, from thought-provoking opinions to exciting new tools and developments in AI. Grab your favorite beverage, and let's dive into some of the most interesting stories that shaped the tech world this week.

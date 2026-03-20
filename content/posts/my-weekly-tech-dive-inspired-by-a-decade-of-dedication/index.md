@@ -1,6 +1,7 @@
 ---
 title: "My Weekly Tech Dive: Inspired by a Decade of Dedication"
 date: 2025-04-07
+comments: true
 ---
 
 Hey everyone!
