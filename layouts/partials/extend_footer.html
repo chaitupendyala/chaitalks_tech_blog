@@ -8,9 +8,7 @@
 
   function updateUI() {
     if (Notification.permission === 'granted') {
-      bell.classList.add('notify-active');
-      bell.title = 'Notifications enabled';
-      bell.style.display = '';
+      bell.style.display = 'none';
     } else if (Notification.permission === 'denied') {
       bell.style.display = 'none';
     } else {
