@@ -345,52 +345,6 @@
   }
 }
 
-/* ===== Post Reactions ===== */
-.post-reactions {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 2rem 0;
-  padding: 1rem;
-  background: var(--entry);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-
-.reaction-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.4rem 0.8rem;
-  border: 1px solid var(--border);
-  border-radius: 2rem;
-  background: var(--theme);
-  color: var(--secondary);
-  cursor: pointer;
-  font-size: 0.85rem;
-  transition: all 0.15s ease;
-  user-select: none;
-}
-
-.reaction-btn:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-  transform: scale(1.05);
-}
-
-.reaction-btn.reacted {
-  background: var(--tertiary);
-  border-color: var(--primary);
-  color: var(--primary);
-  font-weight: 600;
-}
-
-.reaction-btn .reaction-count {
-  font-size: 0.75rem;
-  opacity: 0.7;
-}
-
 /* ===== Notification Bell (Header) ===== */
 .notify-bell {
   background: none;
