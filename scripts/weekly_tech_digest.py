@@ -143,6 +143,7 @@ tags:
 {tags_yaml}
 categories:
   - "tech-news"
+comments: true
 ---"""
 
     # Body
