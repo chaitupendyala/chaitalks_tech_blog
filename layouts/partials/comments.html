@@ -4,7 +4,7 @@
 <div class="giscus-container">
   <script>
     (function() {
-      var theme = document.body.classList.contains('dark') ? 'dark' : 'light';
+      var theme = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
       var s = document.createElement('script');
       s.src = 'https://giscus.app/client.js';
       s.setAttribute('data-repo', 'chaitupendyala/chaitalks_tech_blog');
@@ -27,7 +27,7 @@
       var toggle = document.getElementById('theme-toggle');
       if (toggle) {
         toggle.addEventListener('click', function() {
-          var isDark = document.body.classList.contains('dark');
+          var isDark = document.documentElement.dataset.theme === 'dark';
           var frame = document.querySelector('iframe.giscus-frame');
           if (frame) {
             frame.contentWindow.postMessage(
