@@ -17,23 +17,25 @@
 </div>
 
 <script>
-// Read query param and pre-fill the search input
-document.addEventListener('DOMContentLoaded', function() {
+// Read query param and pre-fill the search input, then trigger search
+// fastsearch.js uses window.onload to init fuse, so we poll via keyup events
+window.addEventListener('load', function() {
     var params = new URLSearchParams(window.location.search);
     var query = params.get('q');
     if (query) {
         var input = document.getElementById('searchInput');
         if (input) {
             input.value = query;
-            // Trigger search after fuse.js loads
-            var checkFuse = setInterval(function() {
-                if (typeof fuse !== 'undefined' && fuse) {
-                    clearInterval(checkFuse);
-                    input.dispatchEvent(new Event('keyup'));
+            // Small delay to let fastsearch.js finish XHR init
+            var attempts = 0;
+            var trySearch = setInterval(function() {
+                input.dispatchEvent(new KeyboardEvent('keyup', { key: 'a' }));
+                attempts++;
+                var results = document.getElementById('searchResults');
+                if ((results && results.children.length > 0) || attempts > 40) {
+                    clearInterval(trySearch);
                 }
-            }, 50);
-            // Stop checking after 5 seconds
-            setTimeout(function() { clearInterval(checkFuse); }, 5000);
+            }, 100);
         }
     }
 });
