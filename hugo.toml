@@ -12,9 +12,9 @@ author = 'Chai'
 description = 'ChaiTalks.Tech — Chai writes about AI, software, and interesting things he is building.'
 keywords = ['AI', 'software', 'technology', 'MCP', 'LLM', 'developer', 'blog']
 ShowReadingTime = true
-ShowShareButtons = true
+ShowShareButtons = false
 ShowPostNavLinks = true
-comments = true
+comments = false
 
 [params.schema]
 publisherType = 'Person'

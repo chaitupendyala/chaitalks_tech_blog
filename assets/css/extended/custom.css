@@ -287,68 +287,6 @@
   margin-top: 0.25rem;
 }
 
-/* ===== Newsletter Signup ===== */
-.newsletter-box {
-  margin: 2rem 0;
-  padding: 1.5rem;
-  background: var(--entry);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  text-align: center;
-}
-
-.newsletter-box h3 {
-  margin: 0 0 0.5rem;
-  font-size: 1.1rem;
-}
-
-.newsletter-box p {
-  margin: 0 0 1rem;
-  color: var(--secondary);
-  font-size: 0.9rem;
-}
-
-.newsletter-box .newsletter-form {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.newsletter-box input[type="email"] {
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--theme);
-  color: var(--primary);
-  font-size: 0.9rem;
-  min-width: 220px;
-}
-
-.newsletter-box button {
-  padding: 0.5rem 1rem;
-  background: var(--primary);
-  color: var(--theme);
-  border: none;
-  border-radius: var(--radius);
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 0.9rem;
-}
-
-.newsletter-box button:hover {
-  opacity: 0.9;
-}
-
-.newsletter-rss {
-  margin-top: 0.75rem;
-  font-size: 0.8rem;
-  color: var(--secondary);
-}
-
-.newsletter-rss a {
-  color: var(--primary);
-}
 
 
 /* ===== Nav Inline Search ===== */
@@ -363,12 +301,15 @@
 }
 
 .nav-search-input {
-  padding: 0.15rem 0.6rem 0.15rem 1.8rem;
+  padding: 2px 0.5rem 2px 1.6rem;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--theme);
   color: var(--primary);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  height: 28px;
+  box-sizing: border-box;
   width: 160px;
   transition: width 0.2s ease, border-color 0.2s ease;
   outline: none;
