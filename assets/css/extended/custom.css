@@ -336,12 +336,187 @@
   pointer-events: none;
 }
 
-@media (max-width: 600px) {
-  .nav-search-input {
-    width: 120px;
+/* ===== Mobile Navigation (hamburger + search expand) ===== */
+
+/* Hidden on desktop */
+.mobile-search-btn,
+.mobile-search-form,
+.hamburger-btn,
+.mobile-menu {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* Hide desktop menu */
+  #menu { display: none !important; }
+
+  /* Nav: single row, no wrapping, relative for dropdown */
+  .nav {
+    flex-wrap: nowrap !important;
+    align-items: center;
+    position: relative;
   }
-  .nav-search-input:focus {
-    width: 160px;
+  .header {
+    padding: 6px 0;
+  }
+
+  /* Logo: shrinks to make room, no overflow clipping until search active */
+  .logo {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .logo a img {
+    height: 36px !important;
+    width: auto;
+    flex-shrink: 0;
+  }
+  .logo a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  /* Site name: animatable collapse */
+  .logo-text {
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 200px;
+    opacity: 1;
+    transition: max-width 0.28s ease, opacity 0.2s ease;
+  }
+
+  /* logo-switches: theme toggle + bell — visible on mobile, animatable */
+  .logo-switches {
+    overflow: hidden;
+    max-width: 120px;
+    opacity: 1;
+    transition: max-width 0.28s ease, opacity 0.2s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Mobile search button */
+  .mobile-search-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--secondary);
+    cursor: pointer;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 8px;
+    flex-shrink: 0;
+  }
+  .mobile-search-btn:hover { color: var(--primary); }
+
+  /* Mobile search form: hidden by default, animates open */
+  .mobile-search-form {
+    display: flex;
+    align-items: center;
+    max-width: 0;
+    overflow: hidden;
+    opacity: 0;
+    gap: 4px;
+    transition: max-width 0.32s ease, opacity 0.25s ease;
+    flex-shrink: 1;
+  }
+  .mobile-search-form input {
+    min-width: 120px;
+    flex: 1;
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--theme);
+    color: var(--primary);
+    font-size: 16px;
+    height: 36px;
+    outline: none;
+    box-sizing: border-box;
+  }
+  .mobile-search-form input:focus {
+    border-color: var(--primary);
+  }
+  .mobile-search-close {
+    background: none;
+    border: none;
+    color: var(--secondary);
+    cursor: pointer;
+    min-width: 36px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 6px;
+  }
+  .mobile-search-close:hover { color: var(--primary); }
+
+  /* Search active state: collapse logo text + switches, expand form */
+  .nav.search-active .logo-text {
+    max-width: 0;
+    opacity: 0;
+  }
+  .nav.search-active .logo-switches {
+    max-width: 0;
+    opacity: 0;
+  }
+  .nav.search-active .mobile-search-form {
+    max-width: 400px;
+    opacity: 1;
+  }
+
+  /* Hamburger button */
+  .hamburger-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 8px;
+    flex-shrink: 0;
+  }
+
+  /* Mobile dropdown menu */
+  .mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--theme);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    padding: 8px var(--gap) 12px;
+    z-index: 100;
+  }
+  .mobile-menu.open {
+    display: block;
+  }
+  .mobile-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .mobile-menu ul li a {
+    display: block;
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .mobile-menu ul li:last-child a {
+    border-bottom: none;
   }
 }
 
@@ -351,9 +526,12 @@
   border: none;
   cursor: pointer;
   color: var(--secondary);
-  padding: 0;
+  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   transition: color 0.15s ease;
 }
 
@@ -370,3 +548,13 @@
 .giscus-container {
   margin-top: 2rem;
 }
+
+/* ===== Mobile Overrides ===== */
+
+/* Copy button: always visible on touch devices */
+@media (hover: none), (pointer: coarse) {
+  .copy-code-btn {
+    opacity: 1;
+  }
+}
+

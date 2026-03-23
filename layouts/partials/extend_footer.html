@@ -7,13 +7,8 @@
   if (!bell) return;
 
   function updateUI() {
-    if (Notification.permission === 'granted') {
-      bell.style.display = 'none';
-    } else if (Notification.permission === 'denied') {
-      bell.style.display = 'none';
-    } else {
-      bell.style.display = '';
-    }
+    var hide = Notification.permission === 'granted' || Notification.permission === 'denied';
+    bell.style.display = hide ? 'none' : '';
   }
 
   updateUI();

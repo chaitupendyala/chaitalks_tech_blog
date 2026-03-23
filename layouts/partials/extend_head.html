@@ -41,6 +41,63 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 {{- end }}
 
+{{- /* Mobile navigation — hamburger menu + search expand */ -}}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var hamburgerBtn = document.querySelector('.hamburger-btn');
+  var mobileMenu = document.getElementById('mobile-menu');
+  var searchBtn = document.querySelector('.mobile-search-btn');
+  var nav = document.querySelector('.nav');
+  var searchForm = document.querySelector('.mobile-search-form');
+  var searchClose = document.querySelector('.mobile-search-close');
+  var searchInput = searchForm ? searchForm.querySelector('input') : null;
+
+  // Hamburger: toggle mobile menu
+  if (hamburgerBtn && mobileMenu) {
+    hamburgerBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var isOpen = mobileMenu.classList.toggle('open');
+      hamburgerBtn.setAttribute('aria-expanded', String(isOpen));
+      mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+    });
+  }
+
+  // Search: animate open
+  if (searchBtn && nav && searchForm && searchInput) {
+    searchBtn.addEventListener('click', function() {
+      nav.classList.add('search-active');
+      // Delay focus slightly so transition starts first
+      setTimeout(function() { searchInput.focus(); }, 50);
+      // Close hamburger menu if open
+      if (mobileMenu) {
+        mobileMenu.classList.remove('open');
+        if (hamburgerBtn) hamburgerBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+    searchClose.addEventListener('click', function() {
+      nav.classList.remove('search-active');
+      searchInput.value = '';
+    });
+    searchInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        nav.classList.remove('search-active');
+        searchInput.value = '';
+      }
+    });
+  }
+
+  // Close hamburger menu on outside click
+  document.addEventListener('click', function(e) {
+    if (mobileMenu && mobileMenu.classList.contains('open') &&
+        hamburgerBtn && !mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+      mobileMenu.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+    }
+  });
+});
+</script>
+
 {{- /* Code block enhancements — copy button + language badge */ -}}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
