@@ -61,9 +61,9 @@ const heights = layout(prepared, containerWidth);
 
 The official demo site shows several different use cases — editorial columns, fluid text simulation, and a chat UI — all running at 60fps with no layout reflow:
 
-{{< iframe src="https://chenglou.me/pretext/editorial-engine/" height="520" title="Pretext editorial engine demo" >}}
+{{< iframe src="/demos/pretext-demo.html" height="340" title="Pretext live demo" >}}
 
-If the embed above does not load in your browser, head directly to [the Pretext demo site](https://chenglou.me/pretext/) to see the full set of demos.
+You can also check out the [official demo site](https://chenglou.me/pretext/) for more examples, including editorial layouts and fluid text simulations.
 
 * * *
 
