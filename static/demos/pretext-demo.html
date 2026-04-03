@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pretext Demo</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; background: #1a1a1a; }
+    body { display: flex; align-items: flex-start; justify-content: center; padding: 28px 24px; }
+    canvas { display: block; width: 100%; }
+    #note {
+      position: fixed;
+      bottom: 10px;
+      right: 12px;
+      font: 11px monospace;
+      color: #555;
+      letter-spacing: 0.02em;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="c"></canvas>
+  <div id="note">powered by @chenglou/pretext</div>
+
+  <script type="module">
+    import { prepare, layoutWithLines } from 'https://unpkg.com/@chenglou/pretext@0.0.4/dist/layout.js';
+
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+
+    const FONT = '16px monospace';
+    const LINE_HEIGHT = 26;
+    const PAD = 0;
+    const BG = '#1a1a1a';
+    const FG = '#e2e2e2';
+    const DIM = '#666';
+
+    const paragraphs = [
+      {
+        text: "this text doesn't know about the DOM.",
+        color: FG,
+      },
+      {
+        text: "it got measured with canvas math. very sneaky. very fast.",
+        color: FG,
+      },
+      {
+        text: "if you resize this window, Pretext recalculates everything in about 0.09 milliseconds.",
+        color: FG,
+      },
+      {
+        text: "that's faster than you just blinked reading \"0.09 milliseconds\".",
+        color: FG,
+      },
+      {
+        text: "getBoundingClientRect() and I used to be close. I've moved on. please don't tell it.",
+        color: DIM,
+      },
+    ];
+
+    function draw(width) {
+      const dpr = window.devicePixelRatio || 1;
+      ctx.font = FONT;
+
+      let totalHeight = PAD;
+
+      const laid = paragraphs.map(p => {
+        let prepared;
+        try {
+          prepared = prepare(p.text, FONT);
+        } catch (e) {
+          return { lines: [p.text], color: p.color };
+        }
+        let lines;
+        try {
+          lines = layoutWithLines(prepared, width - PAD * 2, LINE_HEIGHT);
+        } catch (e) {
+          lines = [p.text];
+        }
+        return { lines: Array.isArray(lines) ? lines : [p.text], color: p.color };
+      });
+
+      laid.forEach(p => {
+        totalHeight += p.lines.length * LINE_HEIGHT + LINE_HEIGHT;
+      });
+      totalHeight += PAD;
+
+      canvas.width = width * dpr;
+      canvas.height = totalHeight * dpr;
+      canvas.style.height = totalHeight + 'px';
+      ctx.scale(dpr, dpr);
+
+      ctx.fillStyle = BG;
+      ctx.fillRect(0, 0, width, totalHeight);
+
+      ctx.font = FONT;
+      ctx.textBaseline = 'top';
+
+      let y = PAD;
+      laid.forEach(p => {
+        ctx.fillStyle = p.color;
+        p.lines.forEach(line => {
+          ctx.fillText(typeof line === 'string' ? line : (line.text || line), PAD, y);
+          y += LINE_HEIGHT;
+        });
+        y += LINE_HEIGHT;
+      });
+    }
+
+    function render() {
+      const width = canvas.parentElement.clientWidth;
+      if (width > 0) draw(width);
+    }
+
+    render();
+    new ResizeObserver(render).observe(canvas.parentElement);
+  </script>
+</body>
+</html>
