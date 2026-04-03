@@ -21,7 +21,7 @@ Here is a problem you have probably run into. You need to know how tall a block 
 
 It works. But it forces the browser to do a full layout calculation every single time you do it. Do that for 500 messages and you feel it.
 
-**[Pretext](https://github.com/chenglou/pretext)** is a small TypeScript library by Cheng Lou that takes a different approach entirely. Cheng Lou has serious frontend chops — he worked on React's reconciler, built ReasonML, and more recently worked at Midjourney. Pretext feels like something that came out of staring at real rendering bottlenecks for a long time.
+**[Pretext](https://github.com/chenglou/pretext)** is a small TypeScript library by Cheng Lou that takes a different approach entirely. Cheng Lou has serious frontend chops. He worked on React's reconciler, built ReasonML, and more recently worked at Midjourney. Pretext feels like something that came out of staring at real rendering bottlenecks for a long time.
 
 * * *
 
@@ -59,7 +59,7 @@ const heights = layout(prepared, containerWidth);
 
 ## See It in Action
 
-The official demo site shows several different use cases — editorial columns, fluid text simulation, and a chat UI — all running at 60fps with no layout reflow:
+The official demo site shows several use cases: editorial columns, fluid text simulation, and a chat UI, all running at 60fps with no layout reflow:
 
 {{< iframe src="/demos/pretext-demo.html" height="340" title="Pretext live demo" >}}
 
@@ -73,7 +73,7 @@ Chat UIs are the obvious one. You need bubble heights before messages appear so 
 
 Virtual scroll is another strong fit. Windowed list libraries need to estimate item heights for items that are not currently rendered. Most of them either assume a fixed height or use an average-based heuristic. With Pretext, you can get actual heights for all your items upfront.
 
-Masonry and editorial grid layouts also benefit. When you are assigning items to columns based on height, you need those heights before you place anything. The usual approach is to render everything, measure, then reposition — which causes a visible flash. Pretext lets you skip the first render entirely.
+Masonry and editorial grid layouts also benefit. When you are assigning items to columns based on height, you need those heights before you place anything. The usual approach is to render everything, measure, then reposition. That causes a visible flash. Pretext lets you skip the first render entirely.
 
 And then there is the case where there is no DOM at all: worker threads, server-side layout calculations, or any context where you want to compute layout without a browser environment. Canvas measurement works in workers, DOM measurement does not.
 
@@ -83,7 +83,7 @@ And then there is the case where there is no DOM at all: worker threads, server-
 
 A few things worth knowing before you reach for it.
 
-Pretext measures plain text runs. If your content has complex inline HTML — links inside paragraphs, inline images, mixed font weights mid-sentence — you will need to think carefully about how to break that up. It handles multilingual text and emoji well, but the more your layout diverges from a simple paragraph, the more work you need to do on the integration side.
+Pretext measures plain text runs. If your content has complex inline HTML (links inside paragraphs, inline images, mixed font weights mid-sentence), you will need to think carefully about how to break that up. It handles multilingual text and emoji well, but the more your layout diverges from a simple paragraph, the more work you need to do on the integration side.
 
 Font loading matters a lot. If you call `prepare()` before your custom fonts have finished loading, the measurements will use fallback font metrics and will be wrong. The fix is to wait for `document.fonts.ready` before calling `prepare()`. This is easy to forget.
 
@@ -93,6 +93,6 @@ It is also a relatively young library. The API has settled down, but if you are 
 
 Using the DOM to measure text has always been a bit of a workaround. The DOM was designed to render content, not to act as a measurement oracle, and the reflow cost is just the price you pay for abusing it that way. Pretext is one of those tools that makes you wonder why it took this long to exist.
 
-It fits into a broader shift happening in frontend work right now: moving more computation out of the browser's main layout pipeline. Virtual scroll, `ResizeObserver`, off-thread rendering in workers — all of it points in the same direction. Pretext is a small but well-aimed piece of that puzzle.
+It fits into a broader shift happening in frontend work right now: moving more computation out of the browser's main layout pipeline. Virtual scroll, `ResizeObserver`, off-thread rendering in workers. All of it points in the same direction. Pretext is a small but well-aimed piece of that puzzle.
 
 Worth a look at the [repo](https://github.com/chenglou/pretext) if any of this sounds like your problem.
