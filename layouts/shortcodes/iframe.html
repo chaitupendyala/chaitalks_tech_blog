@@ -1,0 +1,11 @@
+<div class="iframe-embed" style="position:relative;width:100%;max-width:{{ with .Get "width" }}{{ . }}{{ else }}100%{{ end }};margin:1.5rem auto;">
+  <iframe
+    src="{{ .Get "src" }}"
+    title="{{ with .Get "title" }}{{ . }}{{ else }}Embedded demo{{ end }}"
+    width="{{ with .Get "width" }}{{ . }}{{ else }}100%{{ end }}"
+    height="{{ with .Get "height" }}{{ . }}{{ else }}500{{ end }}"
+    style="border:none;border-radius:6px;display:block;"
+    loading="lazy"
+    allow="scripts"
+  ></iframe>
+</div>
