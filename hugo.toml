@@ -49,6 +49,11 @@ Find me online:
   url = "/index.xml"
 
 [[menus.main]]
+  name = "About"
+  url = "/about/"
+  weight = 1
+
+[[menus.main]]
   name = "Apps"
   url = "/apps/"
   weight = 2
