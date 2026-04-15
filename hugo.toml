@@ -4,7 +4,7 @@ title = 'ChaiTalks.Tech'
 theme = 'PaperMod'
 
 [outputs]
-home = ["HTML", "RSS", "JSON"]
+home = ["HTML", "RSS", "JSON", "Sitemap"]
 
 [params]
 env = 'production'
