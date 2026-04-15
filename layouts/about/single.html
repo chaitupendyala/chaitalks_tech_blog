@@ -396,13 +396,63 @@
     color: var(--primary);
   }
 
+  /* ── Collapsible sections ── */
+  .collapsible details > summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--primary);
+    margin-bottom: 0;
+  }
+
+  .collapsible details > summary::-webkit-details-marker,
+  .collapsible details > summary::marker {
+    display: none;
+    content: '';
+  }
+
+  .collapsible details[open] > summary {
+    margin-bottom: 1.5rem;
+  }
+
+  .collapsible .about-section-title {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    display: inline;
+  }
+
+  .toggle-chevron {
+    display: inline-block;
+    transition: transform 0.2s ease;
+    font-size: 0.85rem;
+    color: var(--secondary);
+    margin-left: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .collapsible details[open] .toggle-chevron {
+    transform: rotate(180deg);
+  }
+
   /* ── Responsive ── */
   @media (max-width: 640px) {
+    .about-wrapper {
+      padding: 0;
+      margin: 1rem auto;
+    }
     .about-hero {
       flex-direction: column;
       align-items: center;
       text-align: center;
       padding: 2rem 1.5rem;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
     }
     .about-buttons {
       justify-content: center;
@@ -412,6 +462,9 @@
     }
     .about-section {
       padding: 1.5rem 1.25rem;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
     }
     .projects-grid {
       grid-template-columns: 1fr;
@@ -454,108 +507,8 @@
       <p class="about-title">Software Engineer · AI Builder · Open-Source Tinkerer</p>
 
       <p class="about-bio">
-        I'm a software engineer at Oracle, where I build and scale enterprise software used by thousands of hotels worldwide. Outside of work I'm constantly shipping side projects: right now I'm building a hardware context gateway that streams live Raspberry Pi sensor data to AI agents over MCP, an AI-powered resume builder called Vitae Vault, and a RAG system for querying Google Drive. I hold an M.S. in Computer Science from USC (GPA 3.81) and write about what I build at <strong>ChaiTalks.Tech</strong>.
+        I'm a software engineer at Oracle, where I build and scale enterprise software used by thousands of hotels worldwide. Outside of work I'm constantly shipping side projects: right now I'm building a hardware context gateway that streams live Raspberry Pi sensor data to AI agents over MCP, an AI-powered resume builder called Vitae Vault, and a RAG system for querying Google Drive. I hold an M.S. in Computer Science from USC and write about what I build at <strong>ChaiTalks.Tech</strong>.
       </p>
-    </div>
-  </div>
-
-  <!-- ── Skills ── -->
-  <div class="about-section">
-    <h2 class="about-section-title">Skills & Technologies</h2>
-    <div class="skills-grid">
-      <div>
-        <div class="skills-row-label">Languages</div>
-        <div class="skills-tags">
-          <span class="skill-tag">Java</span>
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">JavaScript</span>
-          <span class="skill-tag">C++</span>
-          <span class="skill-tag">C#</span>
-          <span class="skill-tag">Bash</span>
-          <span class="skill-tag">HTML5</span>
-          <span class="skill-tag">CSS3</span>
-          <span class="skill-tag">SQL / PL-SQL</span>
-        </div>
-      </div>
-      <div>
-        <div class="skills-row-label">Frameworks & Libraries</div>
-        <div class="skills-tags">
-          <span class="skill-tag">Spring Boot</span>
-          <span class="skill-tag">React.js</span>
-          <span class="skill-tag">Node.js</span>
-          <span class="skill-tag">Django</span>
-          <span class="skill-tag">Flask</span>
-          <span class="skill-tag">FastAPI</span>
-          <span class="skill-tag">jQuery</span>
-          <span class="skill-tag">ADF</span>
-        </div>
-      </div>
-      <div>
-        <div class="skills-row-label">Technologies & Platforms</div>
-        <div class="skills-tags">
-          <span class="skill-tag">Gen AI / LLM Orchestration</span>
-          <span class="skill-tag">Docker</span>
-          <span class="skill-tag">Kubernetes</span>
-          <span class="skill-tag">REST APIs</span>
-          <span class="skill-tag">OAuth / JWT</span>
-          <span class="skill-tag">CI/CD</span>
-          <span class="skill-tag">PostgreSQL</span>
-          <span class="skill-tag">NoSQL</span>
-          <span class="skill-tag">Oracle Cloud</span>
-          <span class="skill-tag">GCP</span>
-          <span class="skill-tag">Cloudflare</span>
-          <span class="skill-tag">Linux</span>
-          <span class="skill-tag">Git</span>
-          <span class="skill-tag">MCP</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── Experience ── -->
-  <div class="about-section">
-    <h2 class="about-section-title">Work Experience</h2>
-    <div class="exp-list">
-
-      <div class="exp-item">
-        <div class="exp-dot-col">
-          <div class="exp-dot"></div>
-          <div class="exp-line"></div>
-        </div>
-        <div class="exp-content">
-          <div class="exp-header">
-            <span class="exp-role">Software Engineer</span>
-            <span class="exp-period">June 2024 – Present</span>
-          </div>
-          <div class="exp-company">Oracle · Austin, US</div>
-          <ul class="exp-bullets">
-            <li>Contribute to the Booking Management Module of OPERA Cloud, a globally deployed platform handling real-time hotel reservations at scale.</li>
-            <li>Optimized reservation search APIs, achieving a <strong>7% latency reduction</strong> through query and backend refactoring.</li>
-            <li>Architected AIWaitlist end-to-end — an AI-powered revenue growth feature — winning <strong>1st place</strong> in an internal hackathon.</li>
-            <li>Led AI adoption as a member of the AI Champions Team, driving a <strong>100%+ increase</strong> in internal AI usage within 5 months.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-dot-col">
-          <div class="exp-dot"></div>
-        </div>
-        <div class="exp-content">
-          <div class="exp-header">
-            <span class="exp-role">Software Engineer</span>
-            <span class="exp-period">July 2018 – December 2021</span>
-          </div>
-          <div class="exp-company">Oracle · Hyderabad, IN</div>
-          <ul class="exp-bullets">
-            <li>Built the Billing & Receivables Module for OPERA Cloud (Java, ADF, REST APIs, PL/SQL), serving <strong>10,000+ active users</strong>.</li>
-            <li>Designed and delivered 30+ REST APIs for Financial & Accounts Receivable modules, improving hotel operations by <strong>40%</strong>.</li>
-            <li>Reduced the Billing Module bug backlog by <strong>80% in 6 months</strong>, opening bandwidth for new feature development.</li>
-            <li>Reengineered the Accounts Receivable Module, boosting performance by over <strong>150%</strong>.</li>
-          </ul>
-        </div>
-      </div>
-
     </div>
   </div>
 
@@ -666,52 +619,170 @@
     </div>
   </div>
 
+  <!-- ── Skills ── -->
+  <div class="about-section collapsible">
+    <details>
+      <summary>
+        <h2 class="about-section-title">Skills &amp; Technologies</h2>
+        <span class="toggle-chevron">▼</span>
+      </summary>
+      <div class="skills-grid">
+        <div>
+          <div class="skills-row-label">Languages</div>
+          <div class="skills-tags">
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">C++</span>
+            <span class="skill-tag">C#</span>
+            <span class="skill-tag">Bash</span>
+            <span class="skill-tag">HTML5</span>
+            <span class="skill-tag">CSS3</span>
+            <span class="skill-tag">SQL / PL-SQL</span>
+          </div>
+        </div>
+        <div>
+          <div class="skills-row-label">Frameworks &amp; Libraries</div>
+          <div class="skills-tags">
+            <span class="skill-tag">Spring Boot</span>
+            <span class="skill-tag">React.js</span>
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Django</span>
+            <span class="skill-tag">Flask</span>
+            <span class="skill-tag">FastAPI</span>
+            <span class="skill-tag">jQuery</span>
+            <span class="skill-tag">ADF</span>
+          </div>
+        </div>
+        <div>
+          <div class="skills-row-label">Technologies &amp; Platforms</div>
+          <div class="skills-tags">
+            <span class="skill-tag">Gen AI / LLM Orchestration</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">Kubernetes</span>
+            <span class="skill-tag">REST APIs</span>
+            <span class="skill-tag">OAuth / JWT</span>
+            <span class="skill-tag">CI/CD</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">NoSQL</span>
+            <span class="skill-tag">Oracle Cloud</span>
+            <span class="skill-tag">GCP</span>
+            <span class="skill-tag">Cloudflare</span>
+            <span class="skill-tag">Linux</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">MCP</span>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- ── Experience ── -->
+  <div class="about-section collapsible">
+    <details>
+      <summary>
+        <h2 class="about-section-title">Work Experience</h2>
+        <span class="toggle-chevron">▼</span>
+      </summary>
+      <div class="exp-list">
+
+        <div class="exp-item">
+          <div class="exp-dot-col">
+            <div class="exp-dot"></div>
+            <div class="exp-line"></div>
+          </div>
+          <div class="exp-content">
+            <div class="exp-header">
+              <span class="exp-role">Software Engineer</span>
+              <span class="exp-period">June 2024 – Present</span>
+            </div>
+            <div class="exp-company">Oracle · Austin, US</div>
+            <ul class="exp-bullets">
+              <li>Contribute to the Booking Management Module of OPERA Cloud, a globally deployed platform handling real-time hotel reservations at scale.</li>
+              <li>Optimized reservation search APIs, achieving a <strong>7% latency reduction</strong> through query and backend refactoring.</li>
+              <li>Architected AIWaitlist end-to-end — an AI-powered revenue growth feature — winning <strong>1st place</strong> in an internal hackathon.</li>
+              <li>Led AI adoption as a member of the AI Champions Team, driving a <strong>100%+ increase</strong> in internal AI usage within 5 months.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-dot-col">
+            <div class="exp-dot"></div>
+          </div>
+          <div class="exp-content">
+            <div class="exp-header">
+              <span class="exp-role">Software Engineer</span>
+              <span class="exp-period">July 2018 – December 2021</span>
+            </div>
+            <div class="exp-company">Oracle · Hyderabad, IN</div>
+            <ul class="exp-bullets">
+              <li>Built the Billing &amp; Receivables Module for OPERA Cloud (Java, ADF, REST APIs, PL/SQL), serving <strong>10,000+ active users</strong>.</li>
+              <li>Designed and delivered 30+ REST APIs for Financial &amp; Accounts Receivable modules, improving hotel operations by <strong>40%</strong>.</li>
+              <li>Reduced the Billing Module bug backlog by <strong>80% in 6 months</strong>, opening bandwidth for new feature development.</li>
+              <li>Reengineered the Accounts Receivable Module, boosting performance by over <strong>150%</strong>.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </details>
+  </div>
+
   <!-- ── Education ── -->
-  <div class="about-section">
-    <h2 class="about-section-title">Education</h2>
-    <div class="edu-list">
-      <div class="edu-item">
-        <div class="edu-icon">🎓</div>
-        <div>
-          <div class="edu-school">University of Southern California</div>
-          <div class="edu-degree">M.S. in Computer Science · Jan 2022 – Dec 2023</div>
-          <div class="edu-meta">GPA: 3.81 / 4.0</div>
+  <div class="about-section collapsible">
+    <details>
+      <summary>
+        <h2 class="about-section-title">Education</h2>
+        <span class="toggle-chevron">▼</span>
+      </summary>
+      <div class="edu-list">
+        <div class="edu-item">
+          <div class="edu-icon">🎓</div>
+          <div>
+            <div class="edu-school">University of Southern California</div>
+            <div class="edu-degree">M.S. in Computer Science · Jan 2022 – Dec 2023</div>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-icon">🎓</div>
+          <div>
+            <div class="edu-school">Amrita School of Engineering</div>
+            <div class="edu-degree">B.S. in Computer Science · Aug 2014 – Jul 2018</div>
+          </div>
         </div>
       </div>
-      <div class="edu-item">
-        <div class="edu-icon">🎓</div>
-        <div>
-          <div class="edu-school">Amrita School of Engineering</div>
-          <div class="edu-degree">B.S. in Computer Science · Aug 2014 – Jul 2018</div>
-          <div class="edu-meta">GPA: 9.21 / 10</div>
-        </div>
-      </div>
-    </div>
+    </details>
   </div>
 
   <!-- ── Achievements ── -->
-  <div class="about-section">
-    <h2 class="about-section-title">Achievements</h2>
-    <div class="achievement-list">
-      <div class="achievement-item">
-        <div class="achievement-icon">🏆</div>
-        <div class="achievement-text">
-          <strong>1st Place — Oracle Internal Hackathon (Revenue Growth)</strong>: Led the end-to-end build of AIWaitlist, an AI-powered feature that predicts booking cancellations and surfaces confirmation probabilities to drive revenue recovery.
+  <div class="about-section collapsible">
+    <details>
+      <summary>
+        <h2 class="about-section-title">Achievements</h2>
+        <span class="toggle-chevron">▼</span>
+      </summary>
+      <div class="achievement-list">
+        <div class="achievement-item">
+          <div class="achievement-icon">🏆</div>
+          <div class="achievement-text">
+            <strong>1st Place — Oracle Internal Hackathon (Revenue Growth)</strong>: Led the end-to-end build of AIWaitlist, an AI-powered feature that predicts booking cancellations and surfaces confirmation probabilities to drive revenue recovery.
+          </div>
+        </div>
+        <div class="achievement-item">
+          <div class="achievement-icon">🥉</div>
+          <div class="achievement-text">
+            <strong>3rd Place — Honeywell National Hackathon</strong>: Ranked in the top 3 out of 500+ teams, demonstrating strong problem-solving under competitive pressure.
+          </div>
+        </div>
+        <div class="achievement-item">
+          <div class="achievement-icon">🤖</div>
+          <div class="achievement-text">
+            <strong>AI Champions Team — Oracle</strong>: Selected to lead internal AI adoption efforts; drove a 100%+ increase in AI usage across the team within 5 months through tooling, analytics, and internal evangelism.
+          </div>
         </div>
       </div>
-      <div class="achievement-item">
-        <div class="achievement-icon">🥉</div>
-        <div class="achievement-text">
-          <strong>3rd Place — Honeywell National Hackathon</strong>: Ranked in the top 3 out of 500+ teams, demonstrating strong problem-solving under competitive pressure.
-        </div>
-      </div>
-      <div class="achievement-item">
-        <div class="achievement-icon">🤖</div>
-        <div class="achievement-text">
-          <strong>AI Champions Team — Oracle</strong>: Selected to lead internal AI adoption efforts; drove a 100%+ increase in AI usage across the team within 5 months through tooling, analytics, and internal evangelism.
-        </div>
-      </div>
-    </div>
+    </details>
   </div>
 
 </div>
