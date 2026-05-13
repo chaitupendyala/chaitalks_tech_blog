@@ -22,7 +22,7 @@ tags:
   - "ai-fundamentals"
 ---
 
-Every modern Large Language Model — GPT, Claude, Gemini, Llama, you name it — is built on the same core idea introduced in a single 2017 paper called [*Attention Is All You Need*](https://arxiv.org/abs/1706.03762). That idea is the **Transformer**.
+Every modern Large Language Model (GPT, Claude, Gemini, Llama, you name it) is built on the same core idea introduced in a single 2017 paper called [*Attention Is All You Need*](https://arxiv.org/abs/1706.03762). That idea is the **Transformer**.
 
 In this post I want to walk through how the Transformer actually works, in a way that is hopefully easy to follow even if you're not deep into machine learning. I'll use diagrams, small code snippets, and concrete examples wherever they help.
 
@@ -32,10 +32,10 @@ In this post I want to walk through how the Transformer actually works, in a way
 
 Before Transformers, the best language models used **Recurrent Neural Networks** (RNNs) or **LSTMs**. They processed text one word at a time, left to right, remembering a little bit as they went. This worked, but it had two big problems:
 
-1. **They were slow.** You couldn't parallelize them — word 100 had to wait for word 99.
+1. **They were slow.** You couldn't parallelize them: word 100 had to wait for word 99.
 2. **They forgot things.** Long-range relationships ("the *cat*, which had been chased through six paragraphs, finally *slept*") were hard to capture.
 
-The Transformer threw away recurrence entirely. Instead, it lets every word look at every other word *simultaneously* using a mechanism called **self-attention**. This unlocked massive parallelism and dramatically better handling of long context — which is essentially why the LLM era happened.
+The Transformer threw away recurrence entirely. Instead, it lets every word look at every other word *simultaneously* using a mechanism called **self-attention**. This unlocked massive parallelism and dramatically better handling of long context, which is essentially why the LLM era happened.
 
 * * *
 
@@ -97,7 +97,7 @@ Let's unpack each piece.
 
 ## Step 1: Turning Words into Numbers (Embeddings)
 
-Neural networks operate on numbers, not text. So the first thing a Transformer does is convert each token (roughly: a word or subword) into a vector — a list of numbers that represents its meaning.
+Neural networks operate on numbers, not text. So the first thing a Transformer does is convert each token (roughly: a word or subword) into a vector, which is a list of numbers that represents its meaning.
 
 ```
 "chai"   ->  [ 0.12, -0.43, 0.88, ..., 0.05 ]   (e.g. 512 numbers)
@@ -129,7 +129,7 @@ x = embedding(tokens)       # shape: (1, 4, 512)
 
 Here's the catch: self-attention treats the input like a *set*, not a *sequence*. To the model, "the dog bit the man" and "the man bit the dog" look identical unless we tell it about position.
 
-The fix is **positional encoding** — we add a small, position-dependent vector to each token embedding. The original paper used a clever pattern of sines and cosines:
+The fix is **positional encoding**. We add a small, position-dependent vector to each token embedding. The original paper used a clever pattern of sines and cosines:
 
 ```
 PE(pos, 2i)   = sin(pos / 10000^(2i/d_model))
@@ -169,7 +169,7 @@ Modern models often use other variants (learned positions, RoPE, ALiBi), but the
 
 * * *
 
-## Step 3: Self-Attention — The Heart of the Transformer
+## Step 3: Self-Attention, the Heart of the Transformer
 
 This is the idea that makes Transformers work. The intuition:
 
@@ -262,7 +262,7 @@ Each row tells you what that word was "looking at." Notice how "it" attends stro
 
 ## Step 4: Multi-Head Attention
 
-One round of attention learns one *kind* of relationship. But language has many kinds — grammatical, semantic, coreference, and so on. So we run attention **in parallel** with several different Q/K/V projections, then concatenate the results. Each parallel run is called a **head**.
+One round of attention learns one *kind* of relationship. But language has many kinds: grammatical, semantic, coreference, and so on. So we run attention **in parallel** with several different Q/K/V projections, then concatenate the results. Each parallel run is called a **head**.
 
 ```
               Input
@@ -284,7 +284,7 @@ One round of attention learns one *kind* of relationship. But language has many 
             Output
 ```
 
-Different heads end up specializing in different patterns — one might track subject-verb agreement, another might track which pronouns refer to which nouns. (This wasn't designed in; it just emerges.)
+Different heads end up specializing in different patterns. One might track subject-verb agreement, another might track which pronouns refer to which nouns. (This wasn't designed in; it just emerges.)
 
 ```python
 class MultiHeadAttention(nn.Module):
@@ -388,7 +388,7 @@ Without residual connections, training a 12+ layer Transformer would be a nightm
 
 In the encoder, every token can attend to every other token freely. In the decoder (the part that *generates* text), there's a twist: when predicting word `t`, you must not peek at words `t+1`, `t+2`, … because those don't exist yet at inference time.
 
-The fix is a **causal mask** — we zero out (well, set to `-inf` before the softmax) all positions to the right:
+The fix is a **causal mask**. We zero out (well, set to `-inf` before the softmax) all positions to the right:
 
 ```
           Keys ->
@@ -485,19 +485,19 @@ If you want a one-paragraph summary to walk away with:
 
 > A Transformer turns each token into a vector, adds position information, then repeatedly mixes information between tokens (self-attention) and processes each token independently (feed-forward), wrapped in residual connections and layer norms. Stack enough of these blocks, train on enough text, and you get something that has effectively read the internet.
 
-The "magic" isn't really magic — it's a stack of dot products, softmaxes, and linear layers, applied at enormous scale. The genius of the 2017 paper was figuring out that this particular combination, with no recurrence at all, was the right shape for learning language.
+The "magic" isn't really magic. It's a stack of dot products, softmaxes, and linear layers, applied at enormous scale. The genius of the 2017 paper was figuring out that this particular combination, with no recurrence at all, was the right shape for learning language.
 
 * * *
 
 ## References and Further Reading
 
-- Vaswani et al., **["Attention Is All You Need"](https://arxiv.org/abs/1706.03762)** — the original 2017 Transformer paper. Surprisingly readable.
-- Jay Alammar, **["The Illustrated Transformer"](https://jalammar.github.io/illustrated-transformer/)** — beautiful visual walkthrough; still the best intro on the internet.
-- Andrej Karpathy, **["Let's build GPT: from scratch, in code, spelled out"](https://www.youtube.com/watch?v=kCc8FmEb1nY)** — two hours that will leave you understanding GPT.
-- Karpathy's **[nanoGPT](https://github.com/karpathy/nanoGPT)** — a clean, minimal PyTorch implementation of GPT you can read in one sitting.
-- Devlin et al., **["BERT: Pre-training of Deep Bidirectional Transformers"](https://arxiv.org/abs/1810.04805)** — the encoder-only sibling that powered a generation of NLP models.
-- Radford et al., **["Language Models are Unsupervised Multitask Learners"](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)** — the GPT-2 paper; decoder-only Transformers at scale.
-- Lilian Weng, **["The Transformer Family"](https://lilianweng.github.io/posts/2020-04-07-the-transformer-family/)** — great survey of variants (sparse attention, long-context tricks, RoPE, etc.).
-- Dao et al., **["FlashAttention"](https://arxiv.org/abs/2205.14135)** — how modern systems make attention fast and memory-efficient.
+- Vaswani et al., **["Attention Is All You Need"](https://arxiv.org/abs/1706.03762)**: the original 2017 Transformer paper. Surprisingly readable.
+- Jay Alammar, **["The Illustrated Transformer"](https://jalammar.github.io/illustrated-transformer/)**: a beautiful visual walkthrough; still the best intro on the internet.
+- Andrej Karpathy, **["Let's build GPT: from scratch, in code, spelled out"](https://www.youtube.com/watch?v=kCc8FmEb1nY)**: two hours that will leave you understanding GPT.
+- Karpathy's **[nanoGPT](https://github.com/karpathy/nanoGPT)**: a clean, minimal PyTorch implementation of GPT you can read in one sitting.
+- Devlin et al., **["BERT: Pre-training of Deep Bidirectional Transformers"](https://arxiv.org/abs/1810.04805)**: the encoder-only sibling that powered a generation of NLP models.
+- Radford et al., **["Language Models are Unsupervised Multitask Learners"](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)**: the GPT-2 paper; decoder-only Transformers at scale.
+- Lilian Weng, **["The Transformer Family"](https://lilianweng.github.io/posts/2020-04-07-the-transformer-family/)**: a great survey of variants (sparse attention, long-context tricks, RoPE, etc.).
+- Dao et al., **["FlashAttention"](https://arxiv.org/abs/2205.14135)**: how modern systems make attention fast and memory-efficient.
 
 If you implement even a tiny version of the model above and train it on a few megabytes of text, the way these pieces click together stops feeling abstract pretty quickly. Highly recommended.
