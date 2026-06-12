@@ -4,16 +4,12 @@ date: 2025-05-05
 categories: 
   - "computer-science"
   - "mathematics"
-tags: 
-  - "alan-turing"
-  - "algorithms"
-  - "automata-theory"
-  - "limits-of-computation"
-  - "mathematical-puzzles"
-  - "number-theory-potential-connection-due-to-rapid-growth"
-  - "state-machine"
-  - "theory-of-computation"
 series: "Busy Beavers Series"
+description: "How a simple question about Turing machines leads to the Busy Beaver function — a number sequence that grows faster than anything computable."
+tags:
+  - "computer-science"
+  - "theory-of-computation"
+  - "busy-beavers"
 ---
 
 Welcome to part two of my three-part series on the **Busy Beaver problem**.

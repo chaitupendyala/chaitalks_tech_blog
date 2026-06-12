@@ -1,7 +1,6 @@
 ---
 title: "Weekly Tech Digest - March 22, 2026"
 date: 2026-03-22
-description: "A curated weekly roundup of the most interesting stories in tech"
 tags:
   - "ai"
   - "android"
@@ -13,6 +12,7 @@ tags:
 categories:
   - "tech-news"
 comments: true
+description: "This week in tech: Google's 24-hour sideloading delay on Android, open-source updates, and AI news worth a read."
 ---
 
 Hey there, tech enthusiasts! This week's roundup brings a mix of innovation, controversy, and a bit of nostalgia. Dive in for the latest updates on open-source projects, AI developments, and some intriguing opinions from notable tech figures.

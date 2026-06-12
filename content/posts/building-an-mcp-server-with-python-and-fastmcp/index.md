@@ -3,17 +3,12 @@ title: "Building an MCP Server with Python and FastMCP"
 date: 2025-06-16
 categories: 
   - "ai"
-tags: 
-  - "ai-agents"
-  - "build-your-own-gpt"
-  - "chatgpt-tools"
-  - "custom-tools"
-  - "developer-productivity"
-  - "fastmcp"
+description: "A hands-on tutorial for building your first MCP server in Python with FastMCP and uv — from install to a working tool an AI model can call."
+tags:
   - "mcp"
-  - "openai-integration"
-  - "python-automation"
-  - "uv"
+  - "ai"
+  - "python"
+  - "developer-tools"
 ---
 
 MCP is quickly becoming the standard way to give AI models access to external tools and data. Instead of parsing raw text like a shell command, MCP tools receive structured JSON with arguments and context, and return structured results. That makes it much easier to build reliable integrations between AI and real systems.

@@ -3,19 +3,10 @@ title: "What Will Happen to Blogging in the Age of AI?"
 date: 2025-06-09
 categories: 
   - "ai"
-tags: 
-  - "ai-and-content-creation"
-  - "authentic-blogging"
-  - "blogging-tips"
-  - "blogging-trends"
-  - "content-marketing-2025"
-  - "digital-content-strategy"
-  - "future-of-blogging"
-  - "human-vs-ai-content"
-  - "personal-branding"
-  - "seo-in-the-age-of-ai"
-  - "substack-alternatives"
-  - "writing-with-ai"
+description: "AI can write a polished post in seconds — so why blog at all? On what human writing is still for."
+tags:
+  - "ai"
+  - "blogging"
 ---
 
 Blogging isn't dying, it's just getting weird.

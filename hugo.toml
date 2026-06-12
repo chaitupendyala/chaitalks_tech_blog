@@ -12,9 +12,12 @@ author = 'Chai'
 description = 'ChaiTalks.Tech — Chai writes about AI, software, and interesting things he is building.'
 keywords = ['AI', 'software', 'technology', 'MCP', 'LLM', 'developer', 'blog']
 ShowReadingTime = true
-ShowShareButtons = false
+ShowShareButtons = true
 ShowPostNavLinks = true
-comments = false
+ShowToc = true
+TocOpen = false
+ShowBreadCrumbs = true
+comments = true
 
 [params.schema]
 publisherType = 'Person'
@@ -57,4 +60,19 @@ Find me online:
   name = "Apps"
   url = "/apps/"
   weight = 2
+
+[[menus.main]]
+  name = "Archive"
+  url = "/archives/"
+  weight = 3
+
+[[menus.main]]
+  name = "Tags"
+  url = "/tags/"
+  weight = 4
+
+[[menus.main]]
+  name = "Search"
+  url = "/search/"
+  weight = 5
 

@@ -3,27 +3,11 @@ title: "Integrating AI into Applications with the MCP Protocol"
 date: 2025-05-26
 categories: 
   - "ai"
-tags: 
-  - "ai-copilot"
-  - "ai-infrastructure"
-  - "ai-integration"
-  - "ai-middleware"
-  - "ai-product-development"
-  - "anthropic"
-  - "api-design"
-  - "conversational-ai"
-  - "developer-tools-2"
-  - "function-calling"
-  - "generative-ai"
-  - "llms-in-production"
-  - "machine-learning-engineering"
-  - "mcp-protocol"
-  - "model-communication-protocol"
-  - "multimodal-ai"
-  - "openai"
-  - "prompt-engineering"
-  - "standardization-in-ai"
-  - "tool-augmented-ai"
+description: "Why ad-hoc AI integrations break down, and how the Model Context Protocol gives applications a standard way to connect models to tools and data."
+tags:
+  - "mcp"
+  - "ai"
+  - "developer-tools"
 ---
 
 Getting AI into a real application is harder than it looks. The model itself is usually the easy part. The hard part is everything around it: how your app talks to it, how it talks back, how it calls external tools, how you handle context across multiple turns, how you swap in a different model without rewriting everything.

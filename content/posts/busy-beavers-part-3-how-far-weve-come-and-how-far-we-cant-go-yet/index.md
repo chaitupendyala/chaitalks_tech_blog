@@ -4,17 +4,12 @@ date: 2025-05-12
 categories: 
   - "computer-science"
   - "mathematics"
-tags: 
-  - "alan-turing"
-  - "algorithms"
-  - "foundational-computer-science"
-  - "limits-of-computation"
-  - "mathematical-puzzles"
-  - "number-theory-potential-connection-due-to-rapid-growth"
-  - "open-problems-in-computer-science-2"
-  - "state-machine"
-  - "theory-of-computation"
 series: "Busy Beavers Series"
+description: "Where the Busy Beaver hunt stands today: the values we know, the BB(5) breakthrough, and why BB(6) may be forever out of reach."
+tags:
+  - "computer-science"
+  - "theory-of-computation"
+  - "busy-beavers"
 ---
 
 In [Part 1](https://chaitalks.tech/posts/busy-beavers-part-1-what-is-a-turing-machine/) and [Part 2](https://chaitalks.tech/posts/busy-beavers-part-2-diving-deeper/) of this series, we set up the question: given a Turing machine with n states running on a blank tape, what's the maximum number of steps it can take before halting? We saw how that clean, finite-sounding question leads directly into undecidability, incompleteness, and the outer edge of what's knowable.

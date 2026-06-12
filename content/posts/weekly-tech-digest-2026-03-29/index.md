@@ -1,7 +1,6 @@
 ---
 title: "Weekly Tech Digest - March 29, 2026"
 date: 2026-03-29
-description: "A curated weekly roundup of the most interesting stories in tech"
 tags:
   - "ai-efficiency"
   - "linux-gaming"
@@ -13,6 +12,7 @@ tags:
 categories:
   - "tech-news"
 comments: true
+description: "This week in tech: Wine 11's kernel-level speed gains for Linux gaming, plus AI and open-source stories worth a read."
 ---
 
 Hey there, tech enthusiasts! Buckle up for another week of exciting stories from the tech world! We've got a mix of breakthroughs, controversies, and everything in between. Let's dive into some of the most intriguing stories that caught our attention this week.

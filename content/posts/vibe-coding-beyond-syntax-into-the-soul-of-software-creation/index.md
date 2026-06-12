@@ -1,6 +1,10 @@
 ---
 title: "Vibe Coding: Beyond Syntax, Into the Soul of Software Creation"
 date: 2025-04-14
+description: "Karpathy's vibe coding idea taken seriously: what happens to programming when articulating intent matters more than writing syntax."
+tags:
+  - "ai"
+  - "vibe-coding"
 ---
 
 Andrej Karpathy's idea of "vibe coding" is one of those things that sounds almost too hand-wavy when you first hear it, but the more you sit with it the more it makes sense.

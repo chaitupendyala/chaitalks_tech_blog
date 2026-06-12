@@ -1,7 +1,6 @@
 ---
 title: "Weekly Tech Digest - March 16, 2026"
 date: 2026-03-16
-description: "A curated weekly roundup of the most interesting stories in tech"
 tags:
   - "ai"
   - "javascript"
@@ -14,6 +13,7 @@ tags:
 categories:
   - "tech-news"
 comments: true
+description: "This week in tech: Qatar's helium shutdown squeezes the chip supply chain, plus new tools and AI developments worth your time."
 ---
 
 Hey there, tech enthusiasts! This week, we've got a lot to unpack, from thought-provoking opinions to exciting new tools and developments in AI. Grab your favorite beverage, and let's dive into some of the most interesting stories that shaped the tech world this week.

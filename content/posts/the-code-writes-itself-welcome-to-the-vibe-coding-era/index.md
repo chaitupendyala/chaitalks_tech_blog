@@ -4,14 +4,9 @@ date: 2025-04-21
 categories: 
   - "ai"
   - "vibe-coding"
-tags: 
+description: "What vibe coding actually feels like in practice, and why describing intent instead of typing syntax is changing how software gets built."
+tags:
   - "ai"
-  - "chatgpt-cli"
-  - "coding"
-  - "coding-future"
-  - "faster-development"
-  - "future"
-  - "vibe"
   - "vibe-coding"
 ---
 

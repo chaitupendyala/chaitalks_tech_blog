@@ -1,6 +1,10 @@
 ---
 title: "My Weekly Tech Dive: Inspired by a Decade of Dedication"
 date: 2025-04-07
+description: "Why I'm committing to publishing a tech article every week, and what kind of writing you can expect from this blog."
+tags:
+  - "blogging"
+  - "meta"
 ---
 
 Hey everyone!

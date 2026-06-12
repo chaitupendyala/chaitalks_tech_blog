@@ -4,17 +4,10 @@ date: 2025-05-19
 categories: 
   - "programming-languages"
   - "python"
-tags: 
-  - "cargo"
-  - "dependency-management"
-  - "developer-tools"
-  - "pip"
-  - "pipx"
+description: "How uv replaces pip, virtualenv, and pipx with one fast Rust-powered tool — and what Python packaging borrows from Cargo."
+tags:
   - "python"
-  - "python-packaging"
-  - "rust"
-  - "uv"
-  - "virtualenv"
+  - "developer-tools"
 ---
 
 Python packaging has always been a bit of a mess. You've got `pip` for installing packages, `virtualenv` or `venv` for managing environments, `pip-tools` or `poetry` if you want lockfiles, and `pipx` for globally installed tools. They all work, but gluing them together gets old fast.
