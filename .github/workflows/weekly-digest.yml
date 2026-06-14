@@ -45,4 +45,5 @@ jobs:
 
             Please review the generated content before merging.
           labels: automated,content
+          reviewers: chaitupendyala
           delete-branch: true
