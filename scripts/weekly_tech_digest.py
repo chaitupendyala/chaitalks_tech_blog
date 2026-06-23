@@ -30,12 +30,12 @@ def get_recent_top_stories(n=50):
     """Fetch top HN stories from the past 7 days using Algolia search API."""
     cutoff = int(time.time() - 7 * 86400)
 
+    # Only filter by time on the server: Algolia's HN index no longer lists
+    # `points` in numericAttributesForFiltering, so `points>10` 400s. We apply
+    # the points threshold client-side below.
     resp = requests.get(HN_SEARCH_API, params={
         "tags": "story",
-        # Pass as a JSON array (Algolia's canonical multi-condition form).
-        # A bare comma-joined string gets percent-encoded to %2C and Algolia
-        # then parses it as one invalid filter -> 400 Bad Request.
-        "numericFilters": json.dumps([f"created_at_i>{cutoff}", "points>10"]),
+        "numericFilters": f"created_at_i>{cutoff}",
         "hitsPerPage": n,
     }, timeout=15)
     if not resp.ok:
@@ -46,6 +46,8 @@ def get_recent_top_stories(n=50):
     for hit in resp.json().get("hits", []):
         url = hit.get("url")
         if not url:
+            continue
+        if (hit.get("points") or 0) <= 10:
             continue
         stories.append({
             "title": hit.get("title", "Untitled"),
