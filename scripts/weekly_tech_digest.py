@@ -32,9 +32,14 @@ def get_recent_top_stories(n=50):
 
     resp = requests.get(HN_SEARCH_API, params={
         "tags": "story",
-        "numericFilters": f"created_at_i>{cutoff},points>10",
+        # Pass as a JSON array (Algolia's canonical multi-condition form).
+        # A bare comma-joined string gets percent-encoded to %2C and Algolia
+        # then parses it as one invalid filter -> 400 Bad Request.
+        "numericFilters": json.dumps([f"created_at_i>{cutoff}", "points>10"]),
         "hitsPerPage": n,
     }, timeout=15)
+    if not resp.ok:
+        print(f"Error fetching from Hacker News: {resp.status_code} {resp.text[:300]}", file=sys.stderr)
     resp.raise_for_status()
 
     stories = []
